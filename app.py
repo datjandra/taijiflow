@@ -51,8 +51,8 @@ def video_search(query):
         video_url = source_url(video_id)
 
         result = {
-            "video_url": video_url
-            "start": video_start
+            "video_url": video_url,
+            "start": video_start,
             "end": video_end
         }
         return result
