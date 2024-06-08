@@ -16,7 +16,7 @@ def source_url(video_id):
     
     response = requests.get(url, headers=headers)
     response_json = response.json()
-    return response_json.get('source')['url']
+    return response_json['source']['url']
 
 
 def video_search(query):
