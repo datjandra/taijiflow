@@ -52,12 +52,14 @@ def video_search(query):
         video_end = video['end']
         video_url = source_url(video_id)
 
-        result = {
-            "video_url": video_url,
-            "start": video_start,
-            "end": video_end
-        }
-        return result
+        if video_url:
+            result = {
+                "video_url": video_url,
+                "start": video_start,
+                "end": video_end
+            }
+            return result
+    return None
 
 def main():
     st.title("TaijiFlow")
