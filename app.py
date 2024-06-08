@@ -68,7 +68,7 @@ def main():
     if submit_button:
         video_info = video_search(conditions)
         if video_info:
-            st.video(video_info["video_url"] start_time=video_info["start"], end_time=video_info["end"])
+            st.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
             st.markdown("No matching video clip found, please try another query.")
 
