@@ -17,7 +17,7 @@ def video_search(query):
         "operator": "or",
         "conversation_option": "semantic",
         "page_limit": 10,
-        "query": "query,
+        "query": query,
         "index_id": TL_INDEX
     }
     
