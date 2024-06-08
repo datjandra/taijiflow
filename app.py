@@ -5,6 +5,20 @@ import streamlit as st
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
 
+def source_url(video_id):
+    url = "https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/(video_id)"
+
+    headers = {
+        "accept": "application/json",
+        "x-api-key": TL_KEY,
+        "Content-Type": "application/json"
+    }
+    
+    response = requests.get(url, headers=headers)
+    response_json = response.json()
+    return response_json.get('source')['url']
+
+
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
 
@@ -34,6 +48,14 @@ def video_search(query):
         video_id = video['video_id']
         video_start = video['start']
         video_end = video['end']
+        video_url = source_url(video_id)
+
+        result = {
+            "video_url": video_url
+            "start": video_start
+            "end": video_end
+        }
+        return result
 
 def main():
     st.title("TaijiFlow")
@@ -44,8 +66,11 @@ def main():
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
-        video_search(conditions)
-        st.video("https://youtu.be/q8yZSfAOonI", start_time=24, end_time=42)
+        video_info = video_search(conditions)
+        if video_info:
+            st.video(video_info["video_url"] start_time=video_info["start"], end_time=video_info["end"])
+        else:
+            st.markdown("No matching video clip found, please try another query.")
 
 if __name__ == "__main__":
     main()
