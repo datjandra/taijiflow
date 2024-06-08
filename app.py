@@ -44,6 +44,7 @@ def main():
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
+        video_search(conditions)
         st.video("https://youtu.be/q8yZSfAOonI", start_time=24, end_time=42)
 
 if __name__ == "__main__":
