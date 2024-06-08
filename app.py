@@ -33,7 +33,7 @@ def video_search(query):
         video = response_json.get('data')[0]
         video_id = video['video_id']
         video_start = video['start']
-        video_end = video['end]
+        video_end = video['end']
 
 def main():
     st.title("TaijiFlow")
