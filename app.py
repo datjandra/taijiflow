@@ -1,5 +1,9 @@
 import os
+import requests
 import streamlit as st
+
+TL_KEY = os.getenv('TL_KEY')
+TL_INDEX = os.getenv('TL_INDEX')
 
 def main():
     st.title("TaijiFlow")
