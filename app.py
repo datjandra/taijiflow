@@ -11,3 +11,6 @@ def main():
 
     if submit_button:
         st.video("https://youtu.be/q8yZSfAOonI", start_time=24, end_time=42)
+
+if __name__ == "__main__":
+    main()
