@@ -16,8 +16,10 @@ def source_url(video_id):
     
     response = requests.get(url, headers=headers)
     response_json = response.json()
-    return response_json['source']['url']
-
+    if 'source' in response_json:
+        return response_json['source']['url']
+    else:
+        return None
 
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
