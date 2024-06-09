@@ -6,7 +6,7 @@ TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
 
 def source_url(video_id):
-    url = "https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/(video_id)"
+    url = "https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"
 
     headers = {
         "accept": "application/json",
@@ -16,7 +16,7 @@ def source_url(video_id):
     
     response = requests.get(url, headers=headers)
 
-    st.write(response.text)
+    st.write(url)
     
     response_json = response.json()
     if 'source' in response_json:
