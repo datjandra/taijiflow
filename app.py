@@ -2,8 +2,53 @@ import os
 import requests
 import streamlit as st
 
+from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
+from clarifai_grpc.grpc.api.status import status_code_pb2
+from functools import lru_cache
+
+USER_ID = 'openai'
+APP_ID = 'chat-completion'
+MODEL_ID = os.environ.get('MODEL_ID')
+MODEL_VERSION_ID = os.environ.get('MODEL_VERSION_ID')
+PAT = os.environ.get('PAT')
+channel = ClarifaiChannel.get_grpc_channel()
+stub = service_pb2_grpc.V2Stub(channel)
+metadata = (('authorization', 'Key ' + PAT),)
+userDataObject = resources_pb2.UserAppIDSet(user_id=USER_ID, app_id=APP_ID)
+
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
+
+# Function to simplify text
+@lru_cache(maxsize=128)
+def condition_to_exercise(condition):
+    prompt = f"""
+    In two to five words describe movements of a Chinese exercise to alleviate condition: {condition}
+    """
+
+    post_model_outputs_response = stub.PostModelOutputs(
+        service_pb2.PostModelOutputsRequest(
+            user_app_id=userDataObject,  # The userDataObject is created in the overview and is required when using a PAT
+            model_id=MODEL_ID,
+            version_id=MODEL_VERSION_ID,  # This is optional. Defaults to the latest model version
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        text=resources_pb2.Text(
+                            raw=prompt
+                            # url=TEXT_FILE_URL
+                            # raw=file_bytes
+                        )
+                    )
+                )
+            ]
+        ),
+        metadata=metadata
+    )
+
+    output = post_model_outputs_response.outputs[0]
+    return output.data.text.raw
 
 def source_url(video_id):
     url = f"https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"
@@ -70,7 +115,8 @@ def main():
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
-        video_info = video_search(conditions)
+        exercise = condition_to_exercise(conditions)
+        video_info = video_search(exercise)
         if video_info:
             st.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
