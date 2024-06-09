@@ -21,14 +21,12 @@ userDataObject = resources_pb2.UserAppIDSet(user_id=USER_ID, app_id=APP_ID)
 
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
+PROMPT = os.getenv('PROMPT')
 
 # Function to simplify text
 @lru_cache(maxsize=128)
 def condition_to_exercise(condition):
-    prompt = f"""
-    In two to five words describe movements of a Chinese exercise to alleviate condition: {condition}
-    """
-
+    prompt = f"{PROMPT} {condition}"
     post_model_outputs_response = stub.PostModelOutputs(
         service_pb2.PostModelOutputsRequest(
             user_app_id=userDataObject,  # The userDataObject is created in the overview and is required when using a PAT
@@ -109,6 +107,7 @@ def video_search(query):
     return None
 
 def main():
+    st.set_page_config(page_title="Supreme Ultimate Flow")
     st.title("TaijiFlow")
 
     with st.form("user_input_form"):
