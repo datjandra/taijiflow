@@ -15,6 +15,9 @@ def source_url(video_id):
     }
     
     response = requests.get(url, headers=headers)
+
+    st.write(response.text)
+    
     response_json = response.json()
     if 'source' in response_json:
         return response_json['source']['url']
