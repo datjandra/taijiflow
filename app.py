@@ -120,7 +120,7 @@ def main():
         exercise = exercise.lower()
         
         suggestion = f"Suggested exercise for {condition}: {exercise}"
-        placeholder.markdown(suggestion)
+        st.markdown(suggestion)
         
         video_info = video_search(exercise)
         if video_info:
