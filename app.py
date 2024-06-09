@@ -9,12 +9,14 @@ from functools import lru_cache
 
 USER_ID = 'openai'
 APP_ID = 'chat-completion'
+# Change these to whatever model and text URL you want to use
 MODEL_ID = os.environ.get('MODEL_ID')
 MODEL_VERSION_ID = os.environ.get('MODEL_VERSION_ID')
 PAT = os.environ.get('PAT')
+
 channel = ClarifaiChannel.get_grpc_channel()
 stub = service_pb2_grpc.V2Stub(channel)
-metadata = (('authorization', 'Key ' + PAT))
+metadata = (('authorization', 'Key ' + PAT),)
 userDataObject = resources_pb2.UserAppIDSet(user_id=USER_ID, app_id=APP_ID)
 
 TL_KEY = os.getenv('TL_KEY')
