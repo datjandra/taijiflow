@@ -115,17 +115,18 @@ def main():
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
+        placeholder = st.empty()
         exercise = condition_to_exercise(condition)
         exercise = exercise.lower()
         
         suggestion = f"Suggested exercise for {condition}: {exercise}"
-        st.markdown(suggestion)
+        placeholder.markdown(suggestion)
         
         video_info = video_search(exercise)
         if video_info:
-            st.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
+            placeholder.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
-            st.markdown("No matching video clip found, please try another query.")
+            placeholder.markdown("No matching video clip found, please try another query.")
 
 if __name__ == "__main__":
     main()
