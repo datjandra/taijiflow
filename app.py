@@ -117,6 +117,8 @@ def main():
 
     if submit_button:
         exercise = condition_to_exercise(condition)
+        exercise = exercise.lower()
+        
         suggestion = f"Suggested exercise for {condition}: {exercise}"
         st.markdown(suggestion)
         
