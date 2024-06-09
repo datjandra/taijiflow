@@ -112,12 +112,14 @@ def main():
     st.title("TaijiFlow")
 
     with st.form("user_input_form"):
-        conditions = st.text_input("Conditions")
-
+        condition = st.text_input("Condition")
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
-        exercise = condition_to_exercise(conditions)
+        exercise = condition_to_exercise(condition)
+        suggestion = f"Suggested exercise for {condition}: {exercise}"
+        st.markdown(suggestion)
+        
         video_info = video_search(exercise)
         if video_info:
             st.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
