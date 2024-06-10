@@ -77,7 +77,7 @@ def video_search(query):
         "sort_option": "score",
         "operator": "or",
         "conversation_option": "semantic",
-        "page_limit": 10,
+        "page_limit": 1,
         "query": query,
         "index_id": TL_INDEX
     }
@@ -115,18 +115,20 @@ def main():
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
-        placeholder = st.empty()
+        pl_text = st.empty()
+        pl_video = st.empty()
+        
         exercise = condition_to_exercise(condition)
         exercise = exercise.lower()
         
         suggestion = f"Suggested exercise for {condition}: {exercise}"
-        st.markdown(suggestion)
+        pl_text.text(suggestion)
         
         video_info = video_search(exercise)
         if video_info:
-            placeholder.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
+            pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
-            placeholder.markdown("No matching video clip found, please try another query.")
+            pl_video.markdown("No matching video clip found, please try another query.")
 
 if __name__ == "__main__":
     main()
