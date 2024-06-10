@@ -126,7 +126,7 @@ def main():
         
         video_info = video_search(exercise)
         if video_info:
-            pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"], loop=True)
+            pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
             pl_video.markdown("No matching video clip found, please try another query.")
 
