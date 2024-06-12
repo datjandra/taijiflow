@@ -111,18 +111,15 @@ def main():
     st.title("TaijiFlow")
 
     with st.form("user_input_form"):
-        condition = st.text_input("Condition")
+        condition = st.text_input("Condition", placeholder="Medical condition or organ to strengthen.")
         submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
         pl_text = st.empty()
         pl_video = st.empty()
         
-        exercise = condition_to_exercise(condition)
-        exercise = exercise.lower()
-        
-        suggestion = f"Suggested exercise for {condition}: {exercise}"
-        pl_text.text(suggestion)
+        exercise = condition_to_exercise(condition)        
+        pl_text.write(exercise, wrap=True)
         
         video_info = video_search(exercise)
         if video_info:
