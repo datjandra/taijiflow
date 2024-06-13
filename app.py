@@ -70,7 +70,7 @@ def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
 
     payload = {
-        "search_options": ["visual", "conversation", "text_in_video"],
+        "search_options": ["visual", "conversation"],
         "adjust_confidence_level": 0.5,
         "group_by": "clip",
         "threshold": "low",
