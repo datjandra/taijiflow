@@ -13,6 +13,7 @@ APP_ID = 'chat-completion'
 MODEL_ID = os.environ.get('MODEL_ID')
 MODEL_VERSION_ID = os.environ.get('MODEL_VERSION_ID')
 PAT = os.environ.get('PAT')
+SEARCH_OPTIONS = [option.strip() for option in os.environ.get('SEARCH_OPTIONS').split(",") if option.strip()]
 
 channel = ClarifaiChannel.get_grpc_channel()
 stub = service_pb2_grpc.V2Stub(channel)
@@ -70,7 +71,7 @@ def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
 
     payload = {
-        "search_options": ["visual"],
+        "search_options": SEARCH_OPTIONS,
         "adjust_confidence_level": 0.5,
         "group_by": "video",
         "threshold": "low",
@@ -131,7 +132,7 @@ def main():
         if video_info:
             pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
-            pl_video.markdown("No matching video clip found, please try another query.")
+            pl_video.markdown("No matching video found, please retry or rewrite the query.")
 
 if __name__ == "__main__":
     main()
