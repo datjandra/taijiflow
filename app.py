@@ -93,7 +93,7 @@ def video_search(query):
     os.write(1, '{}\n'.format(response_text).encode())
     
     response_json = response.json()
-    if response_json.get('data'):
+    if 'data' in response_json and isinstance(response_json['data'], list) and len(response_json['data']) > 0:
         video = response_json.get('data')[0]
         video_id = video['video_id']
         video_start = video['start']
