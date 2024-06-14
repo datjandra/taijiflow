@@ -126,7 +126,7 @@ def main():
         pl_video = st.empty()
         
         exercise = condition_to_exercise(condition)        
-        pl_text.write(exercise, wrap=True)
+        pl_text.write(exercise)
         
         video_info = video_search(exercise)
         if video_info:
