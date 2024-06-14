@@ -114,6 +114,24 @@ def video_search(query):
         return None        
     return None
 
+# Retrieve the coordinates from the custom component
+def get_coordinates():
+    # This script retrieves the coordinates from the div element created by JavaScript
+    get_coords_script = """
+        <script>
+            let coordinatesDiv = document.getElementById('streamlit-coordinates');
+            if (coordinatesDiv) {
+                let coordinates = coordinatesDiv.getAttribute('data-coordinates');
+                console.log(coordinates);
+                coordinatesDiv.remove(); // Remove the div to avoid re-processing
+                Streamlit.setComponentValue(coordinates);
+            } else {
+                Streamlit.setComponentValue(null);
+            }
+        </script>
+    """
+    return get_coords_script
+
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
     html_title = """ 
@@ -140,6 +158,18 @@ def main():
             pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
+
+    # Embedding the HTML component
+    components.html(open("get_location.html").read(), height=300)
+
+    # Use a custom component to fetch the coordinates
+    coordinates = components.html(get_coordinates(), height=0)
+
+    if coordinates:
+        st.write("Latitude:", coordinates['lat'])
+        st.write("Longitude:", coordinates['lon'])
+    else:
+        st.write("Unable to retrieve coordinates")
 
 if __name__ == "__main__":
     main()
