@@ -114,8 +114,13 @@ def video_search(query):
     return None
 
 def main():
-    st.set_page_config(page_title="Supreme Ultimate Flow", layout="wide", page_icon='☯️')
-    st.title("TaijiFlow")
+    st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
+    html_title = """ 
+    <div style ="background-color:white;padding:13px"> 
+    <h1 style ="color:black;text-align:center;">TaijiFlow</h1> 
+    </div> 
+    """
+    st.markdown(html_title, unsafe_allow_html = True) 
     st.image("https://raw.githubusercontent.com/datjandra/taijiflow/main/baduanjin.jpg")
 
     with st.form("user_input_form"):
