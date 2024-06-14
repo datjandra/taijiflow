@@ -94,19 +94,22 @@ def video_search(query):
     
     response_json = response.json()
     if 'data' in response_json and isinstance(response_json['data'], list) and len(response_json['data']) > 0:
-        video = response_json.get('data')[0]
-        video_id = video['video_id']
-        video_start = video['start']
-        video_end = video['end']
-        video_url = source_url(video_id)
+        first_data = response_json['data'][0]
+        if 'clips' in first_data and isinstance(first_data['clips'], list) and len(first_data['clips']) > 0:
+            video = first_data['clips'][0]
+            video_id = video['video_id']
+            video_start = video['start']
+            video_end = video['end']
+            video_url = source_url(video_id)
 
-        if video_url:
-            result = {
-                "video_url": video_url,
-                "start": video_start,
-                "end": video_end
-            }
-            return result
+            if video_url:
+                result = {
+                    "video_url": video_url,
+                    "start": video_start,
+                    "end": video_end
+                }
+                return result
+        return None        
     return None
 
 def main():
