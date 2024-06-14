@@ -166,10 +166,7 @@ def main():
     coordinates = components.html(get_coordinates(), height=0)
 
     if coordinates:
-        st.write("Latitude:", coordinates['lat'])
-        st.write("Longitude:", coordinates['lon'])
-    else:
-        st.write("Unable to retrieve coordinates")
-
+        os.write(1, '{}\n'.format(coordinates).encode())
+    
 if __name__ == "__main__":
     main()
