@@ -116,6 +116,13 @@ def video_search(query):
         return None        
     return None
 
+# Function to generate Google Maps URL with search terms
+def generate_google_maps_url(lat, lon, zoom, queries):
+    # Join the search terms with a delimiter (space encoded as %20)
+    query = "+".join(quote(term) for term in queries)
+    search_url = f"https://www.google.com/maps/search/{query}/@{lat},{lon},{zoom}z"
+    return search_url
+
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
     html_title = """ 
@@ -152,8 +159,16 @@ def main():
             if latitude is None or longitude is None:
                 raise ValueError("Latitude or longitude is missing in the JSON data")
 
-            st.write(f"Your lat is {latitude}")
-            st.write(f"Your lon is {longitude}")
+            zoom = 19
+            queries = "tai chi, qigong"
+            query_terms = [term.strip() for term in queries.split(",")]
+
+            # Generate the Google Maps URL with the search terms
+            google_maps_url = generate_google_maps_url(latitude, longitude, zoom, query_terms)
+
+            # Display the Google Maps URL in an iframe
+            st.components.v1.iframe(google_maps_url, width=700, height=500)
+        
         except (KeyError, TypeError, ValueError) as e:
             print(f"Error retrieving latitude and longitude: {e}")
         
