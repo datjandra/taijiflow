@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <script>
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const coordinates = {lat: lat, lon: lon};
+        const coordinatesJson = JSON.stringify(coordinates);
+        const streamlitCoordinates = document.createElement('div');
+        streamlitCoordinates.id = 'streamlit-coordinates';
+        streamlitCoordinates.setAttribute('data-coordinates', coordinatesJson);
+        document.body.appendChild(streamlitCoordinates);
+      }
+
+      window.onload = getLocation;
+    </script>
+    <div id="location"></div>
+  </body>
+</html>
