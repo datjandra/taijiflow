@@ -116,6 +116,7 @@ def video_search(query):
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow")
     st.title("TaijiFlow")
+    st.image("https://raw.githubusercontent.com/datjandra/taijiflow/main/baduanjin.jpg")
 
     with st.form("user_input_form"):
         condition = st.text_input("Condition", placeholder="Medical condition or organ to strengthen.")
