@@ -1,6 +1,7 @@
 import os
 import requests
 import streamlit as st
+import streamlit.components.v1 as components
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
