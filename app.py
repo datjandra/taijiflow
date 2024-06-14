@@ -143,7 +143,17 @@ def main():
 
     loc = get_geolocation()
     if loc:
-        st.write(f"Your coordinates are {loc}")
-    
+        try:
+            latitude = loc.get('coords', {}).get('latitude')
+            longitude = loc.get('coords', {}).get('longitude')
+
+            if latitude is None or longitude is None:
+                raise ValueError("Latitude or longitude is missing in the JSON data")
+
+            st.write(f"Your lat is {latitude}")
+            st.write(f"Your lon is {longitude}")
+        except (KeyError, TypeError, ValueError) as e:
+            print(f"Error retrieving latitude and longitude: {e}")
+        
 if __name__ == "__main__":
     main()
