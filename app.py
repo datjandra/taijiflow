@@ -1,7 +1,7 @@
 import os
 import requests
 import streamlit as st
-import streamlit.components.v1 as components
+from streamlit_js_eval import get_geolocation
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -114,24 +114,6 @@ def video_search(query):
         return None        
     return None
 
-# Retrieve the coordinates from the custom component
-def get_coordinates():
-    # This script retrieves the coordinates from the div element created by JavaScript
-    get_coords_script = """
-        <script>
-            let coordinatesDiv = document.getElementById('streamlit-coordinates');
-            if (coordinatesDiv) {
-                let coordinates = coordinatesDiv.getAttribute('data-coordinates');
-                console.log(coordinates);
-                coordinatesDiv.remove(); // Remove the div to avoid re-processing
-                Streamlit.setComponentValue(coordinates);
-            } else {
-                Streamlit.setComponentValue(null);
-            }
-        </script>
-    """
-    return get_coords_script
-
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
     html_title = """ 
@@ -159,14 +141,9 @@ def main():
         else:
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
 
-    # Embedding the HTML component
-    components.html(open("get_location.html").read(), height=300)
-
-    # Use a custom component to fetch the coordinates
-    coordinates = components.html(get_coordinates(), height=0)
-
-    if coordinates:
-        os.write(1, '{}\n'.format(coordinates).encode())
+    loc = get_geolocation()
+    if loc:
+        st.write(f"Your coordinates are {loc}")
     
 if __name__ == "__main__":
     main()
