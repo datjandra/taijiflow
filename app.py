@@ -1,14 +1,11 @@
 import os
 import requests
 import streamlit as st
-from streamlit_js_eval import get_geolocation
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
-
 from functools import lru_cache
-from urllib.parse import quote
 
 USER_ID = 'openai'
 APP_ID = 'chat-completion'
@@ -116,13 +113,6 @@ def video_search(query):
         return None        
     return None
 
-# Function to generate Google Maps URL with search terms
-def generate_google_maps_url(lat, lon, zoom, queries):
-    # Join the search terms with a delimiter (space encoded as %20)
-    query = "+".join(quote(term) for term in queries)
-    search_url = f"https://www.google.com/maps/search/{query}/@{lat},{lon},{zoom}z"
-    return search_url
-
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
     html_title = """ 
@@ -149,43 +139,6 @@ def main():
             pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
-
-    loc = get_geolocation()
-    if loc:
-        try:
-            latitude = loc.get('coords', {}).get('latitude')
-            longitude = loc.get('coords', {}).get('longitude')
-
-            if latitude is None or longitude is None:
-                raise ValueError("Latitude or longitude is missing in the JSON data")
-
-            zoom = 19
-            queries = "tai chi, qigong"
-            query_terms = [term.strip() for term in queries.split(",")]
-
-            # Generate the Google Maps URL with the search terms
-            google_maps_url = generate_google_maps_url(latitude, longitude, zoom, query_terms)
-
-            html_content = f"""
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Google Maps Frame Example</title>
-            </head>
-            <body>
-                <h2>Google Maps with Frame Tag</h2>
-                <frameset rows="100%">
-                    <frame src="{google_maps_url}" frameborder="0">
-                </frameset>
-            </body>
-            </html>
-            """
-
-            # Display the HTML content with st.markdown
-            st.markdown(html_content, unsafe_allow_html=True)
-        
-        except (KeyError, TypeError, ValueError) as e:
-            print(f"Error retrieving latitude and longitude: {e}")
         
 if __name__ == "__main__":
     main()
