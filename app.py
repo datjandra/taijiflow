@@ -90,8 +90,8 @@ def video_search(query):
     }
 
     response = requests.post(url, json=payload, headers=headers)
-    response_text = response.text
-    os.write(1, '{}\n'.format(response_text).encode())
+    #response_text = response.text
+    #os.write(1, '{}\n'.format(response_text).encode())
     
     response_json = response.json()
     if 'data' in response_json and isinstance(response_json['data'], list) and len(response_json['data']) > 0:
