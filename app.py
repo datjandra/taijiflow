@@ -166,8 +166,23 @@ def main():
             # Generate the Google Maps URL with the search terms
             google_maps_url = generate_google_maps_url(latitude, longitude, zoom, query_terms)
 
-            # Display the Google Maps URL in an iframe
-            st.components.v1.iframe(google_maps_url, width=700, height=500)
+            html_content = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Google Maps Frame Example</title>
+            </head>
+            <body>
+                <h2>Google Maps with Frame Tag</h2>
+                <frameset rows="100%">
+                    <frame src="{google_maps_url}" frameborder="0">
+                </frameset>
+            </body>
+            </html>
+            """
+
+            # Display the HTML content with st.markdown
+            st.markdown(html_content, unsafe_allow_html=True)
         
         except (KeyError, TypeError, ValueError) as e:
             print(f"Error retrieving latitude and longitude: {e}")
