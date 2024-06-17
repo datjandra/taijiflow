@@ -124,8 +124,17 @@ def main():
     st.image("https://raw.githubusercontent.com/datjandra/taijiflow/main/baduanjin.jpg")
 
     with st.form("user_input_form"):
-        condition = st.text_input("Condition", placeholder="Medical condition or organ to strengthen.")
-        submit_button = st.form_submit_button(label='Submit')
+        left, center, right = st.columns([1, 2, 1])
+        with left:
+            st.empty()
+        with right:
+            st.empty()
+
+        with center:
+            condition = st.text_input(placeholder="Enter a medical condition or vital function you want to address")
+        
+        with center:
+            submit_button = st.form_submit_button(label='Search')
 
     if submit_button:
         pl_text = st.empty()
