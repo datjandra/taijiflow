@@ -122,19 +122,11 @@ def main():
     """
     st.markdown(html_title, unsafe_allow_html = True) 
     st.image("https://raw.githubusercontent.com/datjandra/taijiflow/main/baduanjin.jpg")
-
+    
+    st.markdown("<style>.row-widget.stButton {text-align: center;}</style>", unsafe_allow_html=True)
     with st.form("user_input_form"):
-        left, center, right = st.columns([1, 2, 1])
-        with left:
-            st.empty()
-        with right:
-            st.empty()
-
-        with center:
-            condition = st.text_input(label="", placeholder="Enter a medical condition or vital function you want to address", label_visibility="collapsed")
-        
-        with center:
-            submit_button = st.form_submit_button(label='Search')
+        condition = st.text_input(label="", placeholder="Enter a medical condition or vital function you want to address", label_visibility="collapsed")
+        submit_button = st.form_submit_button(label='Search')
 
     if submit_button:
         pl_text = st.empty()
