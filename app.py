@@ -131,7 +131,7 @@ def main():
             st.empty()
 
         with center:
-            condition = st.text_input(placeholder="Enter a medical condition or vital function you want to address")
+            condition = st.text_input(label="", placeholder="Enter a medical condition or vital function you want to address", label_visibility="collapsed")
         
         with center:
             submit_button = st.form_submit_button(label='Search')
