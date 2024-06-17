@@ -116,14 +116,21 @@ def video_search(query):
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
     html_title = """ 
-    <div style ="background-color:white;padding:13px"> 
-    <h1 style ="color:black;text-align:center;">TaijiFlow</h1> 
+    <div style ="background-color:white; padding:13px;"> 
+    <h1 style ="color:black; text-align:center;">TaijiFlow</h1> 
     </div> 
     """
     st.markdown(html_title, unsafe_allow_html = True) 
     st.image("https://raw.githubusercontent.com/datjandra/taijiflow/main/baduanjin.jpg")
+
+    css = r'''
+    <style>
+        [data-testid="stForm"] {border: 0px;}
+        .row-widget.stButton {text-align: center;}
+    </style>
+    '''
+    st.markdown(css, unsafe_allow_html=True)
     
-    st.markdown("<style>.row-widget.stButton {text-align: center;}</style>", unsafe_allow_html=True)
     with st.form("user_input_form"):
         condition = st.text_input(label="", placeholder="Enter a medical condition or vital function you want to address", label_visibility="collapsed")
         submit_button = st.form_submit_button(label='Search')
