@@ -132,7 +132,7 @@ def main():
     st.markdown(css, unsafe_allow_html=True)
     
     with st.form("user_input_form"):
-        condition = st.text_input(label="", placeholder="Enter a medical condition or vital function you want to address", label_visibility="collapsed")
+        condition = st.text_input(label=None, placeholder="Enter a medical condition or vital function to address", label_visibility="collapsed")
         submit_button = st.form_submit_button(label='Search')
 
     if submit_button:
