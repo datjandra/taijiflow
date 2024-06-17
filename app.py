@@ -139,9 +139,11 @@ def main():
         pl_text = st.empty()
         pl_video = st.empty()
 
-        with st.spinner('Please wait...'):
+        with st.spinner('Finding a relevant exercise...'):
             exercise = condition_to_exercise(condition)        
-            pl_text.write(exercise)
+        pl_text.write(exercise)
+
+        with st.spinner('Finding a relevant video...'):    
             video_info = video_search(exercise)
             
         if video_info:
