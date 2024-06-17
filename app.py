@@ -138,11 +138,12 @@ def main():
     if submit_button:
         pl_text = st.empty()
         pl_video = st.empty()
-        
-        exercise = condition_to_exercise(condition)        
-        pl_text.write(exercise)
-        
-        video_info = video_search(exercise)
+
+        with st.spinner('Please wait...'):
+            exercise = condition_to_exercise(condition)        
+            pl_text.write(exercise)
+            video_info = video_search(exercise)
+            
         if video_info:
             pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
