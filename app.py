@@ -143,7 +143,7 @@ def main():
             exercise = condition_to_exercise(condition)        
         pl_text.write(exercise)
 
-        with st.spinner('Finding a relevant video...'):    
+        with st.spinner('Finding a relevant video clip...'):    
             video_info = video_search(exercise)
             
         if video_info:
