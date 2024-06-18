@@ -139,7 +139,7 @@ def main():
         pl_text = st.empty()
         pl_video = st.empty()
 
-        with st.spinner('Finding a relevant exercise...'):
+        with st.spinner('Suggesting a relevant exercise...'):
             exercise = condition_to_exercise(condition)        
         pl_text.write(exercise)
 
