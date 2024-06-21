@@ -94,7 +94,7 @@ def video_search(query):
     #os.write(1, '{}\n'.format(response_text).encode())
     
     response_json = response.json()
-    first_video = data.get('data', [{}])[0]
+    first_video = response_json.get('data', [{}])[0]
     video_id = first_video.get('video_id', None)
     video_start = first_video.get('start', None)
     video_end = first_video.get('end', None)
