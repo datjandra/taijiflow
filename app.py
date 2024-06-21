@@ -73,7 +73,7 @@ def video_search(query):
     payload = {
         "search_options": SEARCH_OPTIONS,
         "adjust_confidence_level": 0.5,
-        "group_by": "video",
+        "group_by": "clip",
         "threshold": "low",
         "sort_option": "score",
         "operator": "or",
@@ -94,6 +94,23 @@ def video_search(query):
     #os.write(1, '{}\n'.format(response_text).encode())
     
     response_json = response.json()
+    first_video = data.get('data', [{}])[0]
+    video_id = first_video.get('video_id', None)
+    video_start = first_video.get('start', None)
+    video_end = first_video.get('end', None)
+
+    if video_id:
+        video_url = source_url(video_id)
+        if video_url:
+            result = {
+                "video_url": video_url,
+                "start": video_start,
+                "end": video_end
+            }
+            return result    
+    return None
+    
+    """    
     if 'data' in response_json and isinstance(response_json['data'], list) and len(response_json['data']) > 0:
         first_data = response_json['data'][0]
         if 'clips' in first_data and isinstance(first_data['clips'], list) and len(first_data['clips']) > 0:
@@ -110,7 +127,8 @@ def video_search(query):
                     "end": video_end
                 }
                 return result
-        return None        
+        return None
+        """
     return None
 
 def main():
