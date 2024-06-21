@@ -99,7 +99,7 @@ def video_search(query):
     video_end = first_video.get('end', None)
 
     clips = []
-    for item in data.get('data', []):
+    for item in response_json.get('data', []):
         video_id = item.get('video_id')
         start = item.get('start')
         end = item.get('end')
