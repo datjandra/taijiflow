@@ -91,7 +91,6 @@ def video_search(query):
 
     response = requests.post(url, json=payload, headers=headers)
     #response_text = response.text
-    #os.write(1, '{}\n'.format(response_text).encode())
     
     response_json = response.json()
     first_video = response_json.get('data', [{}])[0]
@@ -99,36 +98,29 @@ def video_search(query):
     video_start = first_video.get('start', None)
     video_end = first_video.get('end', None)
 
+    clips = []
+    for item in data.get('data', []):
+        video_id = item.get('video_id')
+        start = item.get('start')
+        end = item.get('end')
+        thumbnail_url = item.get('thumbnail_url')
+        clips.append({
+            'video_id': video_id,
+            'start': start,
+            'end': end,
+            'thumbnail_url': thumbnail_url
+        })
+    
     if video_id:
         video_url = source_url(video_id)
         if video_url:
             result = {
                 "video_url": video_url,
                 "start": video_start,
-                "end": video_end
+                "end": video_end,
+                "clips": clips
             }
             return result    
-    return None
-    
-    """    
-    if 'data' in response_json and isinstance(response_json['data'], list) and len(response_json['data']) > 0:
-        first_data = response_json['data'][0]
-        if 'clips' in first_data and isinstance(first_data['clips'], list) and len(first_data['clips']) > 0:
-            video = first_data['clips'][0]
-            video_id = video['video_id']
-            video_start = video['start']
-            video_end = video['end']
-            video_url = source_url(video_id)
-
-            if video_url:
-                result = {
-                    "video_url": video_url,
-                    "start": video_start,
-                    "end": video_end
-                }
-                return result
-        return None
-        """
     return None
 
 def main():
