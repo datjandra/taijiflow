@@ -146,8 +146,9 @@ def main():
             clips = video_search(exercise)
             
         if clips:
-            for clip in clips:
-                st.video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
+            with st.container():
+                for clip in clips:
+                    st.video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
 
