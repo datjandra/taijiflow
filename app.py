@@ -1,6 +1,7 @@
 import os
 import requests
 import streamlit as st
+from st_clickable_images import clickable_images
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -160,6 +161,15 @@ def main():
             pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
         else:
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
-        
+
+        clips = video_info["clips"]
+        thumbnail_urls = [clip['thumbnail_url'] for clip in clips]
+        clicked = clickable_images(
+            thumbnail_urls,
+            div_style={"display": "flex", "justify-content": "center", "flex-wrap": "wrap"},
+            img_style={"margin": "5px", "height": "200px"},
+        )
+        st.markdown(f"Image #{clicked} clicked" if clicked > -1 else "No image clicked")
+
 if __name__ == "__main__":
     main()
