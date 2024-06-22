@@ -69,7 +69,7 @@ def source_url(video_id):
         return None
 
 def video_search(query):
-    url = "https://api.twelvelabs.io/v1.2/search"
+    url = "https://api.twelvelabs.io/v1.2/search-v2"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
