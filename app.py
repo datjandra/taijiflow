@@ -70,13 +70,12 @@ def source_url(video_id):
 
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search-v2"
-    url = "https://medscribe.aptimize.ai/test.json"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
         "group_by": "clip",
         "threshold": "low",
-        "page_limit": 10,
+        "page_limit": 3,
         "query_text": query,
         "index_id": TL_INDEX
     }
@@ -88,7 +87,6 @@ def video_search(query):
     }
 
     response = requests.post(url, json=payload, headers=headers)
-    print("hello")
     #response_text = response.text
     #os.write(1, f"{response_text}\n".encode()) 
     
