@@ -138,13 +138,12 @@ def main():
 
     if submit_button:
         pl_text = st.empty()
-        pl_video = st.empty()
 
         with st.spinner('Suggesting a relevant exercise...'):
             exercise = condition_to_exercise(condition)        
         pl_text.write(exercise)
 
-        with st.spinner('Finding a relevant video clip...'):    
+        with st.spinner('Finding relevant video clips...'):    
             clips = video_search(exercise)
             
         if clips:
@@ -152,7 +151,7 @@ def main():
             for clip in clips:
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
-            pl_video.markdown("No matching video found, please retry or rewrite the query.")
+            pl_video.markdown("No matching video clips found, please retry or rewrite the query.")
 
 if __name__ == "__main__":
     main()
