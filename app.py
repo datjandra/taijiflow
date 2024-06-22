@@ -2,6 +2,7 @@ import os
 import requests
 import streamlit as st
 from itertools import cycle
+import logging
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -24,6 +25,8 @@ userDataObject = resources_pb2.UserAppIDSet(user_id=USER_ID, app_id=APP_ID)
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
 PROMPT = os.getenv('PROMPT')
+
+logging.basicConfig(level=logging.INFO)
 
 # Function to simplify text
 @lru_cache(maxsize=128)
