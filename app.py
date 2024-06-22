@@ -70,7 +70,7 @@ def source_url(video_id):
         return None
 
 def video_search(query):
-    url = "https://api.twelvelabs.io/v1.2/search-v2"
+    url = "https://api.twelvelabs.io/v1.2/search"
     #url = "https://medscribe.aptimize.ai/test.json"
 
     payload = {
@@ -80,10 +80,9 @@ def video_search(query):
         "operator":"or",
         "conversation_option":"semantic",
         "group_by": "clip",
-        "query_media_type": "image",
         "threshold": "low",
         "page_limit": 3,
-        "query_text": query,
+        "query": query,
         "index_id": TL_INDEX
     }
     
