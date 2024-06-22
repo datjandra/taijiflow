@@ -143,10 +143,9 @@ def main():
         pl_text.write(exercise)
 
         with st.spinner('Finding a relevant video clip...'):    
-            video_info = video_search(exercise)
+            clips = video_search(exercise)
             
-        if video_info:
-            clips = video_info["clips"]
+        if clips:
             for clip in clips:
                 st.video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
