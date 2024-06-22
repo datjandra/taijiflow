@@ -78,7 +78,7 @@ def video_search(query):
         "adjust_confidence_level": 0.5,
         "sort_option":"score",
         "operator":"or",
-        "conversation_option":"semantic"
+        "conversation_option":"semantic",
         "group_by": "clip",
         "threshold": "low",
         "page_limit": 3,
