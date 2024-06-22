@@ -89,7 +89,7 @@ def video_search(query):
     }
 
     response = requests.post(url, json=payload, headers=headers)
-    logging.debug(response.text)
+    logging.error(response.text)
     
     response_json = response.json()
     first_video = response_json.get('data', [{}])[0]
