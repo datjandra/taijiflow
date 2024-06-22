@@ -25,6 +25,12 @@ TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
 PROMPT = os.getenv('PROMPT')
 
+TL_API_HEADERS = {
+    "accept": "application/json",
+    "x-api-key": TL_KEY,
+    "Content-Type": "application/json"
+}
+
 # Function to simplify text
 @lru_cache(maxsize=128)
 def condition_to_exercise(condition):
@@ -54,15 +60,8 @@ def condition_to_exercise(condition):
 
 @lru_cache(maxsize=128)
 def source_url(video_id):
-    url = f"https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"
-
-    headers = {
-        "accept": "application/json",
-        "x-api-key": TL_KEY,
-        "Content-Type": "application/json"
-    }
-    
-    response = requests.get(url, headers=headers)
+    url = f"https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"    
+    response = requests.get(url, headers=TL_API_HEADERS)
     response_json = response.json()
     if 'source' in response_json:
         return response_json['source']['url']
@@ -85,14 +84,8 @@ def video_search(query):
         "query": query,
         "index_id": TL_INDEX
     }
-    
-    headers = {
-        "accept": "application/json",
-        "x-api-key": TL_KEY,
-        "Content-Type": "application/json"
-    }
 
-    response = requests.post(url, json=payload, headers=headers)    
+    response = requests.post(url, json=payload, headers=TL_API_HEADERS)    
     response_json = response.json()
 
     clips = []
