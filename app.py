@@ -73,12 +73,8 @@ def video_search(query):
 
     payload = {
         "search_options": SEARCH_OPTIONS,
-        # "adjust_confidence_level": 0.5,
         "group_by": "clip",
         "threshold": "low",
-        "sort_option": "score",
-        "operator": "or",
-        "conversation_option": "semantic",
         "page_limit": 10,
         "query_text": query,
         "index_id": TL_INDEX
