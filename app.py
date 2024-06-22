@@ -31,7 +31,6 @@ TL_API_HEADERS = {
     "Content-Type": "application/json"
 }
 
-# Function to simplify text
 @lru_cache(maxsize=128)
 def condition_to_exercise(condition):
     prompt = f"{PROMPT} {condition}"
@@ -45,8 +44,6 @@ def condition_to_exercise(condition):
                     data=resources_pb2.Data(
                         text=resources_pb2.Text(
                             raw=prompt
-                            # url=TEXT_FILE_URL
-                            # raw=file_bytes
                         )
                     )
                 )
