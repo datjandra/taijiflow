@@ -127,7 +127,7 @@ def main():
             exercise = condition_to_exercise(condition)        
         pl_text.write(exercise)
 
-        with st.spinner('Finding relevant video clips...'):    
+        with st.spinner('Finding example video clips...'):    
             clips = video_search(exercise)
             
         if clips:
@@ -135,7 +135,7 @@ def main():
             for clip in clips:
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
-            st.markdown("No matching video clips found, please retry or rewrite the query.")
+            st.markdown("No example video clips found, please retry or rewrite the query.")
 
 if __name__ == "__main__":
     main()
