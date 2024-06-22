@@ -75,6 +75,10 @@ def video_search(query):
 
     payload = {
         "search_options": SEARCH_OPTIONS,
+        "adjust_confidence_level": 0.5,
+        "sort_option":"score",
+        "operator":"or",
+        "conversation_option":"semantic"
         "group_by": "clip",
         "threshold": "low",
         "page_limit": 3,
