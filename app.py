@@ -147,7 +147,7 @@ def main():
             for clip in clips:
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
-            pl_video.markdown("No matching video clips found, please retry or rewrite the query.")
+            st.markdown("No matching video clips found, please retry or rewrite the query.")
 
 if __name__ == "__main__":
     main()
