@@ -102,27 +102,15 @@ def video_search(query):
     clips = []
     for item in response_json.get('data', []):
         video_id = item.get('video_id')
+        video_url = source_url(video_id)
         start = item.get('start')
         end = item.get('end')
-        thumbnail_url = item.get('thumbnail_url')
         clips.append({
-            'video_id': video_id,
+            'video_url': video_url,
             'start': start,
-            'end': end,
-            'thumbnail_url': thumbnail_url
+            'end': end
         })
-    
-    if video_id:
-        video_url = source_url(video_id)
-        if video_url:
-            result = {
-                "video_url": video_url,
-                "start": video_start,
-                "end": video_end,
-                "clips": clips
-            }
-            return result    
-    return None
+    return clips
 
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
@@ -158,19 +146,11 @@ def main():
             video_info = video_search(exercise)
             
         if video_info:
-            pl_video.video(video_info["video_url"], start_time=video_info["start"], end_time=video_info["end"])
+            clips = video_info["clips"]
+            for clip in clips:
+                st.video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
-
-        clips = video_info["clips"]
-        with st.form("clip_select_form"):
-            thumbnail_urls = [clip['thumbnail_url'] for clip in clips]
-            clicked = clickable_images(
-                thumbnail_urls,
-                div_style={"display": "flex", "justify-content": "center", "flex-wrap": "wrap"},
-                img_style={"margin": "5px", "height": "200px"},
-            )
-            st.markdown(f"Image #{clicked} clicked" if clicked > -1 else "No image clicked")
 
 if __name__ == "__main__":
     main()
