@@ -80,6 +80,7 @@ def video_search(query):
         "operator":"or",
         "conversation_option":"semantic",
         "group_by": "clip",
+        "query_media_type": "image",
         "threshold": "low",
         "page_limit": 3,
         "query_text": query,
