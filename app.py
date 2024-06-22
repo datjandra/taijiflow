@@ -52,6 +52,7 @@ def condition_to_exercise(condition):
     output = post_model_outputs_response.outputs[0]
     return output.data.text.raw
 
+@lru_cache(maxsize=128)
 def source_url(video_id):
     url = f"https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"
 
@@ -68,6 +69,7 @@ def source_url(video_id):
     else:
         return None
 
+@lru_cache(maxsize=128)
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
 
