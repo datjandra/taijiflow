@@ -71,7 +71,7 @@ def source_url(video_id):
 
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
-    url = "https://medscribe.aptimize.ai/test.json"
+    #url = "https://medscribe.aptimize.ai/test.json"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
