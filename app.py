@@ -2,7 +2,6 @@ import os
 import requests
 import streamlit as st
 from itertools import cycle
-import logging
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -71,7 +70,6 @@ def source_url(video_id):
 
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
-    #url = "https://medscribe.aptimize.ai/test.json"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
@@ -92,9 +90,7 @@ def video_search(query):
         "Content-Type": "application/json"
     }
 
-    response = requests.post(url, json=payload, headers=headers)
-    logging.error(response.text)
-    
+    response = requests.post(url, json=payload, headers=headers)    
     response_json = response.json()
     first_video = response_json.get('data', [{}])[0]
     video_id = first_video.get('video_id', None)
