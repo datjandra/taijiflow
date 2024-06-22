@@ -92,10 +92,6 @@ def video_search(query):
 
     response = requests.post(url, json=payload, headers=headers)    
     response_json = response.json()
-    first_video = response_json.get('data', [{}])[0]
-    video_id = first_video.get('video_id', None)
-    video_start = first_video.get('start', None)
-    video_end = first_video.get('end', None)
 
     clips = []
     for item in response_json.get('data', []):
