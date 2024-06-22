@@ -71,7 +71,7 @@ def source_url(video_id):
 
 def video_search(query):
     url = "https://api.twelvelabs.io/v1.2/search"
-    #url = "https://medscribe.aptimize.ai/test.json"
+    url = "https://medscribe.aptimize.ai/test.json"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
@@ -81,7 +81,7 @@ def video_search(query):
         "conversation_option":"semantic",
         "group_by": "clip",
         "threshold": "low",
-        "page_limit": 3,
+        "page_limit": 8,
         "query": query,
         "index_id": TL_INDEX
     }
@@ -148,7 +148,7 @@ def main():
             clips = video_search(exercise)
             
         if clips:
-            cols = cycle(st.columns(3)) 
+            cols = cycle(st.columns(2)) 
             for clip in clips:
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
