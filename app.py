@@ -163,8 +163,6 @@ def main():
             pl_video.markdown("No matching video found, please retry or rewrite the query.")
 
         clips = video_info["clips"]
-
-    if clips:
         with st.form("clip_select_form"):
             thumbnail_urls = [clip['thumbnail_url'] for clip in clips]
             clicked = clickable_images(
