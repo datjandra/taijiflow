@@ -26,7 +26,7 @@ TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
 PROMPT = os.getenv('PROMPT')
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.ERROR)
 
 # Function to simplify text
 @lru_cache(maxsize=128)
