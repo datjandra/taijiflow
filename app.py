@@ -137,7 +137,7 @@ def main():
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
         else:
             st.markdown("No example video clips found, please retry or rewrite the query.")
-        pl_disclaimer.write("These exercises are not intended to replace professional medical advice, diagnosis, or treatment. Please consult your healthcare provider with any questions or concerns regarding your health.")    
+        pl_disclaimer.markdown("These exercises are not intended to replace professional medical advice, diagnosis, or treatment. Please consult your healthcare provider with any questions or concerns regarding your health.")    
         
 if __name__ == "__main__":
     main()
