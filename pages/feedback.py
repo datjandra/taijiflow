@@ -16,8 +16,6 @@ def detect_pose():
                ["LHip", "LKnee"], ["LKnee", "LAnkle"], ["Neck", "Nose"], ["Nose", "REye"],
                ["REye", "REar"], ["Nose", "LEye"], ["LEye", "LEar"] ]
 
-    net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
-
 def main():
     st.title("Posture Feedback")
     st.write()
