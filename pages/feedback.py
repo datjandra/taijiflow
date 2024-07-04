@@ -1,7 +1,7 @@
 import cv2 as cv 
 import numpy as np 
 import streamlit as st
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from pil import Image,ImageEnhance
 
 def detect_pose():
