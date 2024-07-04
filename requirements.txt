@@ -1,3 +1,4 @@
 streamlit
 clarifai-grpc
 opencv-python-headless
+mediapipe
