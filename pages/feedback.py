@@ -1,8 +1,8 @@
 import cv2 as cv 
-#import numpy as np 
+import numpy as np 
 import streamlit as st
-#import matplotlib.pyplot as plt
-#from pil import Image,ImageEnhance
+import matplotlib.pyplot as plt
+from pil import Image,ImageEnhance
 
 def detect_pose():
     BODY_PARTS = { "Nose": 0, "Neck": 1, "RShoulder": 2, "RElbow": 3, "RWrist": 4,
