@@ -16,6 +16,7 @@ def detect_pose():
         use_webcam = False
 
     if use_webcam:
+        canvas = st.image([])
         cap = cv.VideoCapture(0)
 
         start_time = time.time()
@@ -29,6 +30,7 @@ def detect_pose():
                 pose_results = pose.process(img_rgb)
                 mp_drawing.draw_landmarks(img, pose_results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
                 cv.imshow('Output', img)
+                canvas.iamge(img_rgb)
             except:
                 break
             
