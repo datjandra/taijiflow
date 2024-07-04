@@ -100,7 +100,7 @@ def video_search(query):
 
 def setup_menu():
     st.sidebar.page_link("app.py", label="Exercises")
-    # st.sidebar.page_link("page/feedback.py", label="Feedback")
+    st.sidebar.page_link("page/feedback.py", label="Feedback")
     
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
