@@ -28,8 +28,8 @@ def detect_pose():
             if elapsed_time >= 30:
                 break
     
-    cap.release()
-    cv2.destroyAllWindows()
+        cap.release()
+        cv2.destroyAllWindows()
 
 def main():
     st.title("Posture Feedback")
