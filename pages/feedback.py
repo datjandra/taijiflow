@@ -16,7 +16,7 @@ def detect_pose():
         use_webcam = False
 
     if use_webcam:
-        cap = cv2.VideoCapture(0)
+        cap = cv.VideoCapture(0)
 
         start_time = time.time()
         while cap.isOpened():
@@ -29,7 +29,7 @@ def detect_pose():
                 break
     
         cap.release()
-        cv2.destroyAllWindows()
+        cv.destroyAllWindows()
 
 def main():
     st.title("Posture Feedback")
