@@ -28,13 +28,12 @@ def detect_pose():
             try:
                 img_rgb = cv.cvtColor(img, cv.COLOR_BGR2RGB)
                 pose_results = pose.process(img_rgb)
-                mp_drawing.draw_landmarks(img, pose_results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+                mp_drawing.draw_landmarks(img_rgh, pose_results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
                 canvas.image(img_rgb)
             except:
                 break
-                
-            elapsed_time = time.time() - start_time
-            if elapsed_time >= 30:
+
+            if cv.waitKey(5) & 0xFF == ord('q'):
                 break
     
         cap.release()
