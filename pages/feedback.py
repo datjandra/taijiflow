@@ -1,4 +1,4 @@
-import cv2 as cv 
+#import cv2 as cv 
 #import numpy as np 
 import streamlit as st
 #import matplotlib.pyplot as plt
@@ -16,7 +16,7 @@ def detect_pose():
                ["LHip", "LKnee"], ["LKnee", "LAnkle"], ["Neck", "Nose"], ["Nose", "REye"],
                ["REye", "REar"], ["Nose", "LEye"], ["LEye", "LEar"] ]
 
-    net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
+    #net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
 
 def main():
     st.title("Posture Feedback")
