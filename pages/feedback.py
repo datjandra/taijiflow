@@ -29,7 +29,7 @@ def detect_pose():
                 break
     
         cap.release()
-        cv.destroyAllWindows()
+        # cv.destroyAllWindows()
 
 def main():
     st.title("Posture Feedback")
