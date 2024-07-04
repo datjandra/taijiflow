@@ -3,6 +3,7 @@ import numpy as np
 import streamlit as st
 import mediapipe as mp
 import time
+import tempfile
 
 ## initialize pose estimator
 mp_drawing = mp.solutions.drawing_utils
