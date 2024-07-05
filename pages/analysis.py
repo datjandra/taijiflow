@@ -40,7 +40,7 @@ def main():
                       )
                   ),
                   resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(base64=bytes_data))
+                    data=resources_pb2.Data(image=resources_pb2.Image(raw=bytes_data))
                   )
               ]
           ),
