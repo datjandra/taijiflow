@@ -1,6 +1,7 @@
 import os
 import requests
 import streamlit as st
+import base64
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -24,7 +25,8 @@ def main():
     uploaded_file = st.file_uploader("Picture of your posture")
     if uploaded_file is not None:
       bytes_data = uploaded_file.getvalue()
-
+      encoded)data = base64.b64encode(bytes_data).decode('utf-8')
+    
       post_model_outputs_response = stub.PostModelOutputs(
           service_pb2.PostModelOutputsRequest(
               user_app_id=userDataObject,  # The userDataObject is created in the overview and is required when using a PAT
@@ -39,7 +41,7 @@ def main():
                       )
                   ),
                   resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(base64=bytes_data))
+                    data=resources_pb2.Data(image=resources_pb2.Image(base64=encoded_data))
                   )
               ]
           ),
