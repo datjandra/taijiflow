@@ -25,7 +25,7 @@ def main():
     uploaded_file = st.file_uploader("Picture of your posture")
     if uploaded_file is not None:
       bytes_data = uploaded_file.getvalue()
-      encoded)data = base64.b64encode(bytes_data).decode('utf-8')
+      encoded_data = base64.b64encode(bytes_data).decode('utf-8')
     
       post_model_outputs_response = stub.PostModelOutputs(
           service_pb2.PostModelOutputsRequest(
