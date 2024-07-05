@@ -48,11 +48,9 @@ def main():
       )
       
       if post_model_outputs_response.status.code != status_code_pb2.SUCCESS:
-          print(post_model_outputs_response.status)
-          logging.error(f"Post model outputs failed, status: {post_model_outputs_response.status.description}")
-          raise Exception(f"Post model outputs failed, status: {post_model_outputs_response.status.description}")
-      
-      output = post_model_outputs_response.outputs[0]
+          output = f"Post model outputs failed, status: {post_model_outputs_response.status.description}"
+      else:
+          output = post_model_outputs_response.outputs[0]
       st.write(output)
         
 if __name__ == "__main__":
