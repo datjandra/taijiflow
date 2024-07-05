@@ -4,6 +4,7 @@ import streamlit as st
 import mediapipe as mp
 import time
 import tempfile
+import os
 
 ## initialize pose estimator
 mp_drawing = mp.solutions.drawing_utils
@@ -37,6 +38,8 @@ def detect_pose():
                 break
     
         cap.release()
+        tmpfile.close()
+        os.remove(tmpfile.name)
         # cv.destroyAllWindows()
 
 def main():
