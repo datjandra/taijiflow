@@ -1,4 +1,2 @@
 streamlit
 clarifai-grpc
-opencv-python
-mediapipe
