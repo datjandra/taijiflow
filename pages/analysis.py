@@ -1,6 +1,7 @@
 import os
 import requests
 import streamlit as st
+import logging
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -48,6 +49,7 @@ def main():
       
       if post_model_outputs_response.status.code != status_code_pb2.SUCCESS:
           print(post_model_outputs_response.status)
+          logging.error(f"Post model outputs failed, status: {post_model_outputs_response.status.description}")
           raise Exception(f"Post model outputs failed, status: {post_model_outputs_response.status.description}")
       
       output = post_model_outputs_response.outputs[0]
