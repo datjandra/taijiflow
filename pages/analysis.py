@@ -41,14 +41,14 @@ def main():
                       )
                   ),
                   resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url="https://i0.wp.com/the-healing-warrior.com/wp-content/uploads/2020/07/standing-meditation-zhan-zhuang.jpeg"))
+                    data=resources_pb2.Data(image=resources_pb2.Image(base64=encoded_data))
                   )
               ]
           ),
           metadata=metadata
       )
       
-      if post_model_outputs_response.status.code != status_code_pb2.SUCCESS:
+      if (post_model_outputs_response.status.code != status_code_pb2.SUCCESS or post_model_outputs_response.status.code != status_code_pb2.MIXED_STATUS):
           output = f"Post model outputs failed, status: {post_model_outputs_response.status.description}"
           st.write(output)
       else:
