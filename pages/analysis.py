@@ -41,7 +41,7 @@ def main():
                       )
                   ),
                   resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(base64=encoded_data))
+                    data=resources_pb2.Data(image=resources_pb2.Image(url="https://i0.wp.com/the-healing-warrior.com/wp-content/uploads/2020/07/standing-meditation-zhan-zhuang.jpeg"))
                   )
               ]
           ),
