@@ -97,10 +97,6 @@ def video_search(query):
             'end': end
         })
     return clips
-
-def setup_menu():
-    st.sidebar.page_link("app.py", label="Exercises")
-    st.sidebar.page_link("https://datjandra.github.io/pose.html", label="Analysis")
     
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
@@ -111,7 +107,6 @@ def main():
     """
     st.markdown(html_title, unsafe_allow_html = True) 
     st.image("https://raw.githubusercontent.com/datjandra/taijiflow/main/baduanjin.jpg")
-    setup_menu()
     
     css = r'''
     <style>
