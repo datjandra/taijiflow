@@ -1,7 +1,5 @@
 import os
-import requests
 import streamlit as st
-import base64
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -25,34 +23,35 @@ def main():
     uploaded_file = st.file_uploader("Picture of your posture")
     if uploaded_file is not None:
       bytes_data = uploaded_file.getvalue()
-    
-      post_model_outputs_response = stub.PostModelOutputs(
-          service_pb2.PostModelOutputsRequest(
-              user_app_id=userDataObject,  # The userDataObject is created in the overview and is required when using a PAT
-              model_id=MODEL_ID,
-              version_id=MODEL_VERSION_ID,  # This is optional. Defaults to the latest model version
-              inputs=[
-                  resources_pb2.Input(
-                      data=resources_pb2.Data(
-                          text=resources_pb2.Text(
-                              raw=PROMPT
-                          ),
-                          image=resources_pb2.Image(
-                              base64=bytes_data
+
+      with st.spinner('Analyzing image of posture...'):  
+          post_model_outputs_response = stub.PostModelOutputs(
+              service_pb2.PostModelOutputsRequest(
+                  user_app_id=userDataObject,  # The userDataObject is created in the overview and is required when using a PAT
+                  model_id=MODEL_ID,
+                  version_id=MODEL_VERSION_ID,  # This is optional. Defaults to the latest model version
+                  inputs=[
+                      resources_pb2.Input(
+                          data=resources_pb2.Data(
+                              text=resources_pb2.Text(
+                                  raw=PROMPT
+                              ),
+                              image=resources_pb2.Image(
+                                  base64=bytes_data
+                              )
                           )
                       )
-                  )
-              ]
-          ),
-          metadata=metadata
-      )
-      
-      if (post_model_outputs_response.status.code != status_code_pb2.SUCCESS):
-          output = f"Post model outputs failed, status: {post_model_outputs_response.status.description}"
-          st.write(output)
-      else:
-          output = post_model_outputs_response.outputs[0]
-          st.write(output.data.text.raw)
+                  ]
+              ),
+              metadata=metadata
+          )
+          
+          if (post_model_outputs_response.status.code != status_code_pb2.SUCCESS):
+              output = f"Post model outputs failed, status: {post_model_outputs_response.status.description}"
+              st.write(output)
+          else:
+              output = post_model_outputs_response.outputs[0]
+              st.write(output.data.text.raw)
       
 if __name__ == "__main__":
     main()
