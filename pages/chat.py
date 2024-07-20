@@ -12,14 +12,15 @@ chat = model.start_chat(history=[])
 
 st.title("Healthy Aging Advisor")
 for message in chat.history:
-  with st.chat_message(message["role"]):
-    st.markdown(message["text"])
+  with st.chat_message(message.role):
+    st.markdown(message.parts[0].text)
 
 if input := st.chat_input("Enter your wellness goal"):
   with st.chat_message("user"):
     st.markdown(input)
 
   with st.chat_message("advisor"):
-    response = chat.send_message(input)
-    for chunk in response:
-      st.markdown(chunk.text)
+    with st.spinner('Thank you for your input...'):
+      response = chat.send_message(input)
+      for chunk in response:
+        st.markdown(chunk.text)
