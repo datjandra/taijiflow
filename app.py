@@ -11,7 +11,7 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 SEARCH_OPTIONS = [option.strip() for option in os.environ.get('SEARCH_OPTIONS').split(",") if option.strip()]
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel(GEN_MODEL)
+model = genai.GenerativeModel(GEM_MODEL)
 
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
