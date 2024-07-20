@@ -4,6 +4,7 @@ import streamlit as st
 from itertools import cycle
 from functools import lru_cache
 import google.generativeai as genai
+from st_pages import add_page_title
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_EXERCISE_PROMPT = os.getenv('GEM_EXERCISE_PROMPT')
@@ -90,6 +91,8 @@ def video_search(query):
     
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
+    add_page_title()
+    
     html_title = """ 
     <div style ="background-color:white; padding:13px;"> 
     <h1 style ="color:black; text-align:center;">TaijiFlow</h1> 
