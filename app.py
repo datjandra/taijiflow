@@ -11,7 +11,7 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 SEARCH_OPTIONS = [option.strip() for option in os.environ.get('SEARCH_OPTIONS').split(",") if option.strip()]
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel(GEM_MODEL)
+model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_EXERCISE_PROMPT)
 
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
@@ -29,9 +29,7 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
     risks = risks if risks else "None"
     goal = goal if goal else "None"
     
-    prompt = f"""
-    {GEM_EXERCISE_PROMPT}
-    
+    profile = f"""
     Age: {age}
     Gender: {gender}
     Height: {height} inches
@@ -42,7 +40,7 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
     """
     
     try:
-        response = model.generate_content(prompt)
+        response = model.generate_content(profile)
         return response.text
     except:
         return "Unable to suggest a relevant exercise. Please rewrite query or try again later."
