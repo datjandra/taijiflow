@@ -53,7 +53,7 @@ def main():
           
           if (post_model_outputs_response.status.code != status_code_pb2.SUCCESS):
               output = f"Post model outputs failed, status: {post_model_outputs_response.status.description}"
-              st.markdown(output)
+              st.write(output)
           else:
               output = post_model_outputs_response.outputs[0]
               st.markdown(output.data.text.raw)
