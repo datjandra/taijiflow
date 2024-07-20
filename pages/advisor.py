@@ -10,6 +10,7 @@ genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_CHAT_PROMPT)
 chat = model.start_chat(history=[])
 
+st.set_page_config(page_title="Healthy Aging Advisor")
 st.title("Healthy Aging Advisor")
 for message in chat.history:
   with st.chat_message(message.role):
