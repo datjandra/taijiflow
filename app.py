@@ -24,9 +24,23 @@ TL_API_HEADERS = {
 }
 
 @lru_cache(maxsize=128)
-def condition_to_exercise(condition):
-    prompt = f"{GEM_EXERCISE_PROMPT} Query: {condition}"
-
+def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
+    conditions = conditions if conditions else "None"
+    risks = risks if risks else "None"
+    goal = goal if goal else "None"
+    
+    prompt = f"""
+    {GEM_EXERCISE_PROMPT}
+    
+    Age: {age}
+    Gender: {gender}
+    Height: {height}
+    Weight: {weight}
+    Conditions: {conditions}
+    Risks: {risks}
+    Goal: {goal}
+    """
+    
     try:
         response = model.generate_content(prompt)
         return response.text
@@ -95,7 +109,13 @@ def main():
     st.markdown(css, unsafe_allow_html=True)
     
     with st.form("user_input_form"):
-        condition = st.text_input(label="Query", placeholder="Enter a medical condition (e.g., high blood pressure) or vital function (e.g., healthy kidneys)", label_visibility="collapsed")
+        age = st.number_input("Age", min_value=1, max_value=150, step=1)
+        gender = st.selectbox("Gender", ["Male", "Female"])
+        weight = st.number_input("Weight (pounds)", min_value=30, max_value=1500, step=1)
+        height = st.number_input("Height (inches)", min_value=20, max_value=110, step=1)
+        conditions = st.text_input(label="Medical Conditions", placeholder="Enter any medical conditions (e.g., high blood pressure)")
+        risks = st.text_input(label="Risks", placeholder="Enter any lifestyle risks (e.g., smoker)")
+        goal = st.text_input(label="Goal", placeholder="Enter your wellness goal (e.g., strong immune system)")
         submit_button = st.form_submit_button(label='Search')
 
     if submit_button:
@@ -103,7 +123,7 @@ def main():
         pl_disclaimer = st.empty()
 
         with st.spinner('Suggesting a relevant exercise...'):
-            exercise = condition_to_exercise(condition)        
+            exercise = profile_to_exercise(age, gender, weight, height, conditions, risks, goal)        
         pl_text.write(exercise)
 
         with st.spinner('Finding example video clips...'):    
