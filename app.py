@@ -107,6 +107,7 @@ def main():
     </style>
     '''
     st.markdown(css, unsafe_allow_html=True)
+    st.markdown("### Please fill in the form below to get a personalized exercise suggestion.")
     
     with st.form("user_input_form"):
         age = st.number_input("Age", min_value=1, max_value=150, step=1)
@@ -116,7 +117,7 @@ def main():
         conditions = st.text_input(label="Medical Conditions", placeholder="Enter any medical conditions (e.g., high blood pressure)")
         risks = st.text_input(label="Risks", placeholder="Enter any lifestyle risks (e.g., smoker)")
         goal = st.text_input(label="Goal", placeholder="Enter your wellness goal (e.g., strong immune system)")
-        submit_button = st.form_submit_button(label='Search')
+        submit_button = st.form_submit_button(label='Go')
 
     if submit_button:
         pl_text = st.empty()
