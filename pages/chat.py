@@ -20,7 +20,7 @@ if input := st.chat_input("Enter your wellness goal"):
   with st.chat_message("user"):
     st.markdown(input)
 
-with st.chat_message("advisor"):
-  response = chat.send_message(input, stream=True)
-  for chunk in response:
-    st.write_stream(chunk.text)
+  with st.chat_message("advisor"):
+    response = chat.send_message(input, stream=True)
+    for chunk in response:
+      st.write_stream(chunk.text)
