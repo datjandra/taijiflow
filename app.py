@@ -34,8 +34,8 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
     
     Age: {age}
     Gender: {gender}
-    Height: {height}
-    Weight: {weight}
+    Height: {height} inches
+    Weight: {weight} pounds
     Conditions: {conditions}
     Risks: {risks}
     Goal: {goal}
