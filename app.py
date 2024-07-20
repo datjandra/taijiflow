@@ -124,7 +124,7 @@ def main():
         pl_disclaimer = st.empty()
 
         with st.spinner('Suggesting a relevant exercise...'):
-            exercise = profile_to_exercise(age, gender, weight, height, conditions, risks, goal)        
+            exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal)        
         pl_text.write(exercise)
 
         with st.spinner('Finding example video clips...'):    
