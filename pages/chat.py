@@ -12,9 +12,8 @@ chat = model.start_chat(history=[])
 
 st.title("Healthy Aging Advisor")
 for message in chat.history:
-  pass
-  # with st.chat_message(message["role"]):
-  #  st.markdown(message["text"])
+  with st.chat_message(message["role"]):
+  st.markdown(message["text"])
 
 if input := st.chat_input("Enter your wellness goal"):
   with st.chat_message("user"):
