@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+from PIL import Image
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
