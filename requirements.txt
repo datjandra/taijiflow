@@ -1,3 +1,4 @@
 streamlit
 clarifai-grpc
 google-generativeai
+pillow
