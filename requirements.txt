@@ -1,4 +1,3 @@
 streamlit
 clarifai-grpc
 google-generativeai
-st-pages
