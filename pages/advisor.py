@@ -12,9 +12,9 @@ chat = model.start_chat(history=[])
 
 st.set_page_config(page_title="Healthy Aging Advisor")
 st.title("Healthy Aging Advisor")
-st.sidebar.page_link("app.py", label="Home")
-st.sidebar.page_link("pages/advisor.py", label="Healthy Aging Advisor")
-st.sidebar.page_link("pages/analysis.py", label="Posture Analysis")
+st.sidebar.page_link("app.py", label="🏠 Home")
+st.sidebar.page_link("pages/advisor.py", label="👵 Healthy Aging Advisor")
+st.sidebar.page_link("pages/analysis.py", label="🖼️ Posture Analysis")
 
 for message in chat.history:
   with st.chat_message(message.role):
