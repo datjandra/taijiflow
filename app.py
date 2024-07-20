@@ -110,10 +110,10 @@ def main():
     st.markdown("### Please fill in the form below to get a personalized exercise suggestion.")
     
     with st.form("user_input_form"):
-        age = st.number_input("Age", min_value=1, max_value=150, step=1)
+        age = st.number_input("Age", min_value=1, max_value=150, value=65, step=1)
         gender = st.selectbox("Gender", ["Male", "Female"])
-        weight = st.number_input("Weight (pounds)", min_value=30, max_value=1500, step=1)
-        height = st.number_input("Height (inches)", min_value=20, max_value=110, step=1)
+        weight = st.number_input("Weight (pounds)", min_value=30, max_value=1500, value=200, step=1)
+        height = st.number_input("Height (inches)", min_value=20, max_value=110, value=70, step=1)
         conditions = st.text_input(label="Medical Conditions", placeholder="Enter any medical conditions (e.g., high blood pressure)")
         risks = st.text_input(label="Lifestyle Risks", placeholder="Enter any lifestyle risks (e.g., smoker)")
         goal = st.text_input(label="Wellness Goal", placeholder="Enter your wellness goal (e.g., strong immune system)")
