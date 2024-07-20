@@ -4,7 +4,7 @@ import streamlit as st
 from itertools import cycle
 from functools import lru_cache
 import google.generativeai as genai
-from st_pages import Page, show_pages
+from st_pages import Page, show_pages, add_page_title
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_EXERCISE_PROMPT = os.getenv('GEM_EXERCISE_PROMPT')
@@ -24,6 +24,7 @@ TL_API_HEADERS = {
     "Content-Type": "application/json"
 }
 
+add_page_title()
 show_pages(
     [
         Page("app.py", "Home", "🏠"),
