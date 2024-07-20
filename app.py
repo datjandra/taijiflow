@@ -90,7 +90,10 @@ def video_search(query):
 
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
-    
+    st.sidebar.page_link("app.py", label="Home")
+    st.sidebar.page_link("pages/advisor.py", label="Healthy Aging Advisor")
+    st.sidebar.page_link("pages/analysis.py", label="Posture Analysis")
+
     html_title = """ 
     <div style ="background-color:white; padding:13px;"> 
     <h1 style ="color:black; text-align:center;">TaijiFlow</h1> 
