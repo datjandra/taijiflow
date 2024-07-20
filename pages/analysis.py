@@ -21,6 +21,10 @@ userDataObject = resources_pb2.UserAppIDSet(user_id=USER_ID, app_id=APP_ID)
 def main():
     st.set_page_config(page_title="Posture Analysis")
     st.title("Standing Posture Analysis")
+    st.sidebar.page_link("app.py", label="Home")
+    st.sidebar.page_link("pages/advisor.py", label="Healthy Aging Advisor")
+    st.sidebar.page_link("pages/analysis.py", label="Posture Analysis")
+
     uploaded_file = st.file_uploader("Please upload a picture of your standing posture")
     if uploaded_file is not None:
       bytes_data = uploaded_file.getvalue()
