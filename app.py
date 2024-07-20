@@ -4,7 +4,7 @@ import streamlit as st
 from itertools import cycle
 from functools import lru_cache
 import google.generativeai as genai
-from st_pages import add_page_title
+from st_pages import Page, show_pages
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_EXERCISE_PROMPT = os.getenv('GEM_EXERCISE_PROMPT')
@@ -23,6 +23,12 @@ TL_API_HEADERS = {
     "x-api-key": TL_KEY,
     "Content-Type": "application/json"
 }
+
+show_pages(
+    [
+        Page("app.py", "Home", "🏠"),
+    ]
+)
 
 @lru_cache(maxsize=128)
 def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
@@ -88,10 +94,9 @@ def video_search(query):
             'end': end
         })
     return clips
-    
+
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
-    add_page_title()
     
     html_title = """ 
     <div style ="background-color:white; padding:13px;"> 
