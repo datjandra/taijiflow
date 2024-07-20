@@ -26,10 +26,13 @@ def main():
     st.sidebar.page_link("pages/advisor.py", label="Healthy Aging Advisor")
     st.sidebar.page_link("pages/analysis.py", label="Posture Analysis")
 
-    uploaded_file = st.file_uploader("Please upload a picture of your standing posture")
+    uploaded_file = st.file_uploader("Please upload a picture of your standing posture", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
-      bytes_data = uploaded_file.getvalue()
+      image = Image.open(uploaded_file)
+      if image is not None:  
+        st.image(image)
 
+      bytes_data = uploaded_file.getvalue()  
       with st.spinner('Analyzing image of posture...'):  
           post_model_outputs_response = stub.PostModelOutputs(
               service_pb2.PostModelOutputsRequest(
