@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Exercise</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .bubble {
+            width: 100px;
+            height: 100px;
+            background-color: #87CEFA;
+            border-radius: 50%;
+            margin: auto;
+            transition: transform 1s ease-in-out;
+        }
+        .bubble.expand {
+            transform: scale(1.5);
+        }
+        .bubble.contract {
+            transform: scale(1);
+        }
+        .instructions {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #exercise-audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bubble"></div>
+        <div class="instructions">
+            <p>Breathe in for <span id="breathe-in-duration">4</span> seconds</p>
+            <p>Breathe out for <span id="breathe-out-duration">8</span> seconds</p>
+        </div>
+        <audio id="exercise-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
+    </div>
+    <script>
+        function startBreathingAnimation() {
+            const bubble = document.querySelector('.bubble');
+            const audio = document.querySelector('#exercise-audio');
+            const breatheInDuration = parseInt(document.getElementById('breathe-in-duration').textContent);
+            const breatheOutDuration = parseInt(document.getElementById('breathe-out-duration').textContent);
+            
+            function breatheIn() {
+                bubble.classList.add('expand');
+                bubble.classList.remove('contract');
+            }
+
+            function breatheOut() {
+                bubble.classList.add('contract');
+                setTimeout(() => {
+                    bubble.classList.remove('contract');
+                }, 1000);
+            }
+
+            function startCycle() {
+                breatheIn();
+                setTimeout(() => {
+                    breatheOut();
+                    setTimeout(startCycle, breatheInDuration * 1000 + breatheOutDuration * 1000);
+                }, breatheInDuration * 1000);
+            }
+
+            // Start audio playback
+            audio.play();
+
+            startCycle();
+
+            // Stop audio after the total cycle duration (assuming 3 cycles)
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0;
+            }, (breatheInDuration + breatheOutDuration) * 3 * 1000);
+        }
+
+        // Start the animation when the page loads
+        window.onload = startBreathingAnimation;
+    </script>
+</body>
+</html>
