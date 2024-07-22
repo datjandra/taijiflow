@@ -69,7 +69,8 @@
             }
 
             function startCycle() {
-                breatheIn();
+                setTimeout(breatheIn(), breatheInDuration * 1000);
+                
                 setTimeout(() => {
                     breatheOut();
                     setTimeout(startCycle, breatheOutDuration * 1000);
