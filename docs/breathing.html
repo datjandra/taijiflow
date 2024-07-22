@@ -18,18 +18,30 @@
             text-align: center;
         }
         .bubble {
-            width: 100px;
-            height: 100px;
-            background-color: #87CEFA;
-            border-radius: 50%;
-            margin: auto;
-            transition: transform 1s ease-in-out;
+          height: 100px;
+          width: 100px;
+          border-radius: 200px;
+          background: #ADD8E6;
+          margin: auto;
+          margin-top: 200px;
         }
-        .bubble.expand {
-            transform: scale(1.5);
+        .bubble-change {
+          animation-name: bubble-change;
+          animation-duration: 3s;
+          animation-delay: 0s;
+          animation-iteration-count:infinite;
+        	animation-timing-function: ease-in-out;
+          animation-direction: alternate;
         }
-        .bubble.contract {
-            transform: scale(1);
+        @keyframes bubble-change {
+            from { 
+                transform: scale(1); 
+                background: #ADD8E6;
+            }
+            to { 
+                transform: scale(1.5); 
+                background: #BFDBF7;
+            }
         }
         .instructions {
             margin-top: 40px;
@@ -42,55 +54,12 @@
 </head>
 <body>
     <div class="container">
-        <div class="bubble"></div>
+        <div class="bubble bubble-change"></div>
         <div class="instructions">
             <p>Breathe in for <span id="breathe-in-duration">3</span> seconds</p>
             <p>Breathe out for <span id="breathe-out-duration">3</span> seconds</p>
         </div>
         <audio id="exercise-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto"></audio>
     </div>
-    <script>
-        function startBreathingAnimation() {
-            const bubble = document.querySelector('.bubble');
-            const audio = document.querySelector('#exercise-audio');
-            const breatheInDuration = parseInt(document.getElementById('breathe-in-duration').textContent);
-            const breatheOutDuration = parseInt(document.getElementById('breathe-out-duration').textContent);
-            
-            function breatheIn() {
-                bubble.classList.add('expand');
-                bubble.classList.remove('contract');
-            }
-
-            function breatheOut() {
-                bubble.classList.add('contract');
-                setTimeout(() => {
-                    bubble.classList.remove('contract');
-                }, 1000); // Keeps the bubble collapsed for a short duration before expanding again
-            }
-
-            function startCycle() {
-                setTimeout(breatheIn(), breatheInDuration * 1000);
-                
-                setTimeout(() => {
-                    breatheOut();
-                    setTimeout(startCycle, breatheOutDuration * 1000);
-                }, breatheInDuration * 1000);
-            }
-
-            // Start audio playback
-            audio.play();
-
-            startCycle();
-
-            // Stop audio after the total cycle duration (assuming 3 cycles)
-            setTimeout(() => {
-                audio.pause();
-                audio.currentTime = 0;
-            }, (breatheInDuration + breatheOutDuration) * 3 * 1000);
-        }
-
-        // Start the animation when the page loads
-        window.onload = startBreathingAnimation;
-    </script>
 </body>
 </html>
