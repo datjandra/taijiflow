@@ -4,6 +4,7 @@ import streamlit as st
 from itertools import cycle
 from functools import lru_cache
 import google.generativeai as genai
+from menu import menu
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_EXERCISE_PROMPT = os.getenv('GEM_EXERCISE_PROMPT')
@@ -90,9 +91,7 @@ def video_search(query):
 
 def main():
     st.set_page_config(page_title="Supreme Ultimate Flow", page_icon='☯️')
-    st.sidebar.page_link("app.py", label="🏠 Home")
-    st.sidebar.page_link("pages/advisor.py", label="👵 Healthy Aging Advisor")
-    st.sidebar.page_link("pages/analysis.py", label="🖼️ Posture Analysis")
+    menu()
 
     html_title = """ 
     <div style ="background-color:white; padding:13px;"> 
