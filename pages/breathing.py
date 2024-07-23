@@ -6,6 +6,13 @@ def main():
     <h1 style ="color:black; text-align:center;">Simple Breathing Exercise</h1>
     """
     st.markdown(html_title, unsafe_allow_html = True) 
+
+    css = r'''
+    <style>
+        #audio {display: none;}
+    </style>
+    '''
+    st.markdown(css, unsafe_allow_html=True)
     components.iframe("https://datjandra.github.io/taijiflow/breathing.html", height=500)
 
     st.audio("https://github.com/datjandra/taijiflow/raw/main/docs/InfiniteWonder.mp3", format="audio/mpeg", loop=True, autoplay=True)
