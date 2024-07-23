@@ -47,7 +47,7 @@
             font-size: 18px;
         }
         #exercise-audio {
-            /* display: none; */
+            display: none;
         }
     </style>
 </head>
@@ -58,9 +58,9 @@
             <p>Breathe in for <span id="breathe-in-duration">3</span> seconds</p>
             <p>Breathe out for <span id="breathe-out-duration">3</span> seconds</p>
         </div>
-        <audio id="exercise-audio" src="InfiniteWonder.mp3" preload="auto" autoplay>
-            Your browser does not support audio.
-        </audio>
+        <video id="exercise-audio" preload="auto" name="media" autoplay>
+            <source src="InfiniteWonder.mp3" type="audio/mp3">
+        </video>
     </div>
 </body>
 </html>
