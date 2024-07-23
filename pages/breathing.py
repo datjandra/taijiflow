@@ -1,7 +1,11 @@
 import streamlit as st
 import streamlit.components.v1 as components
+from menu import menu
 
 def main():
+    st.title("Breathing Exercise")
+    menu()
+
     html_title = """ 
     <h1 style ="color:black; text-align:center;">Simple Breathing Exercise</h1>
     """
