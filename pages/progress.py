@@ -65,15 +65,15 @@ def main():
   fig.add_trace(go.Scatterpolar(
       r=values + [values[0]],  # Close the radar chart
       theta=categories + [categories[0]],
-      fill='toself'
+      fill='toself',
+      name='Health Score'
   ))
 
   fig.update_layout(
       polar=dict(
           radialaxis=dict(visible=True, range=[0, 100])
       ),
-      showlegend=False,
-      title='Wellness Score'
+      showlegend=False
   )
 
   # Display radar chart and overall score
