@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 import google.generativeai as genai
+from menu import menu
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_CHAT_PROMPT = os.getenv('GEM_CHAT_PROMPT')
@@ -12,9 +13,7 @@ chat = model.start_chat(history=[])
 
 st.set_page_config(page_title="Healthy Aging Advisor")
 st.title("Healthy Aging Advisor")
-st.sidebar.page_link("app.py", label="🏠 Home")
-st.sidebar.page_link("pages/advisor.py", label="👵 Healthy Aging Advisor")
-st.sidebar.page_link("pages/analysis.py", label="🖼️ Posture Analysis")
+menu()
 
 for message in chat.history:
   with st.chat_message(message.role):
