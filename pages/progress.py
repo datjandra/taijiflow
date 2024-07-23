@@ -73,7 +73,8 @@ def main():
       polar=dict(
           radialaxis=dict(visible=True, range=[0, 100])
       ),
-      showlegend=False
+      showlegend=False,
+      title='Healthy Aging Progress'
   )
 
   # Display radar chart and overall score
