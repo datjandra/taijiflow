@@ -32,7 +32,7 @@ def calculate_scores(sleep_hours, exercise_days, exercise_minutes,
     return sleep_quality_score, physical_activity_score, nutrition_score, mental_wellbeing_score, overall_score
 
 def main():
-  st.set_page_config(page_title="Progress Tracking")
+  st.set_page_config(page_title="Progress Tracker")
   st.title("Wellness Score")
   menu()
 
