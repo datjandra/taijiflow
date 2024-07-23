@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 from menu import menu
 
 def main():
-    st.title("Breathing Exercise")
+    st.set_page_config(page_title="Breathing Exercise")
     menu()
 
     html_title = """ 
