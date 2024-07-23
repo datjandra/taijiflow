@@ -59,14 +59,14 @@
         </div>
     </div>
     <script>
-        const bubbleChange = document.getElementsByClassName('bubble-change');
+        const bubbleChange = document.getElementsByClassName('bubble-change')[0];
         const durationInput = document.getElementById('duration');
         const breatheInDuration = document.getElementById('breathe-in-duration');
         const breatheOutDuration = document.getElementById('breathe-out-duration');
 
         durationInput.addEventListener('input', (event) => {
             const duration = event.target.value;
-            bubbleChange.style["animation-duration"] = `${duration}s`;
+            bubbleChange.style.animationDuration = `${duration}s`;
             breatheInDuration.textContent = duration;
             breatheOutDuration.textContent = duration;
         });
