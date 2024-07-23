@@ -29,7 +29,7 @@
           animation-duration: 3s;
           animation-delay: 0s;
           animation-iteration-count:infinite;
-        	animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
           animation-direction: alternate;
         }
         @keyframes bubble-change {
@@ -54,7 +54,22 @@
         <div class="instructions">
             <p>Breathe in for <span id="breathe-in-duration">3</span> seconds</p>
             <p>Breathe out for <span id="breathe-out-duration">3</span> seconds</p>
+            <label for="duration">Duration (seconds): </label>
+            <input type="number" id="duration" name="duration" min="1" value="3">
         </div>
     </div>
+    <script>
+        const bubble = document.getElementById('bubble');
+        const durationInput = document.getElementById('duration');
+        const breatheInDuration = document.getElementById('breathe-in-duration');
+        const breatheOutDuration = document.getElementById('breathe-out-duration');
+
+        durationInput.addEventListener('input', (event) => {
+            const duration = event.target.value;
+            bubble.style.animationDuration = `${duration}s`;
+            breatheInDuration.textContent = duration;
+            breatheOutDuration.textContent = duration;
+        });
+    </script>
 </body>   
 </html>
