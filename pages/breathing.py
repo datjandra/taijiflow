@@ -15,7 +15,10 @@ def main():
     st.markdown(css, unsafe_allow_html=True)
     components.iframe("https://datjandra.github.io/taijiflow/breathing.html", height=500)
 
-    st.audio("https://github.com/datjandra/taijiflow/raw/main/docs/InfiniteWonder.mp3", format="audio/mpeg", loop=True, autoplay=True)
+    default_audio_url = "https://github.com/datjandra/taijiflow/raw/main/docs/InfiniteWonder.mp3"
+    audio_url = st.text_input("Audio URL", value=default_audio_url)
+    if audio_url:
+        st.audio(audio_url, format="audio/mpeg", loop=True, autoplay=True)
 
 if __name__ == "__main__":
     main()
