@@ -79,7 +79,7 @@ def main():
 
   # Display radar chart and overall score
   st.plotly_chart(fig)
-  st.write(f'Overall Score: {round(overall_score)}')
+  st.write(f'Wellness Score: {round(overall_score)}')
 
 if __name__ == "__main__":
   main()
