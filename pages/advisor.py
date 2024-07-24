@@ -10,13 +10,14 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_CHAT_PROMPT)
 
+if "history" not in st.session_state:
+  st.session_state.history = []
+  
 def main():
   st.set_page_config(page_title="Healthy Aging Advisor")
   st.title("Healthy Aging Advisor")
   menu()
 
-  if "history" not in st.session_state:
-    st.session_state.history = []
   chat = model.start_chat(history=st.session_state.history)
   
   for message in chat.history:
