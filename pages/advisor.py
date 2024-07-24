@@ -15,7 +15,10 @@ def main():
   st.title("Healthy Aging Advisor")
   menu()
 
-  chat = model.start_chat(history=[])
+  if "history" not in st.session_state:
+    st.session_state.history = []
+  chat = model.start_chat(history=st.session_state.history)
+  
   for message in chat.history:
     with st.chat_message(message.role):
       st.markdown(message.parts[0].text)
@@ -29,6 +32,7 @@ def main():
         response = chat.send_message(input)
         for chunk in response:
           st.markdown(chunk.text)
+        st.session_state.history = chat.history  
 
 if __name__ == "__main__":
     main()
