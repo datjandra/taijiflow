@@ -73,12 +73,12 @@ def main():
       polar=dict(
           radialaxis=dict(visible=True, range=[0, 100])
       ),
-      showlegend=False
+      showlegend=False,
+      title=f'Wellness Score: {round(overall_score)}'
   )
 
   # Display radar chart and overall score
   st.plotly_chart(fig)
-  st.write(f'Wellness Score: {round(overall_score)}')
 
 if __name__ == "__main__":
   main()
