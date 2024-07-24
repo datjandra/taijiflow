@@ -19,9 +19,9 @@ def main():
   menu()
 
   chat = model.start_chat(history=st.session_state.history)
-  
   for message in chat.history:
-    with st.chat_message(message.role):
+    role = 'assistant' if message.role == 'model' else message.role
+    with st.chat_message(role):
       st.markdown(message.parts[0].text)
   
   if input := st.chat_input("Enter your wellness goal"):
