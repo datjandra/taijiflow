@@ -32,7 +32,7 @@ def calculate_scores(sleep_hours, exercise_days, exercise_minutes,
     return sleep_quality_score, physical_activity_score, nutrition_score, mental_wellbeing_score, overall_score
 
 def main():
-  st.set_page_config(page_title="Progress Tracker")
+  st.set_page_config(page_title="Self Assessment")
   st.title("Wellness Score")
   menu()
 
@@ -74,7 +74,7 @@ def main():
           radialaxis=dict(visible=True, range=[0, 100])
       ),
       showlegend=False,
-      title='Healthy Aging Progress'
+      title='Healthy Aging Assessment'
   )
 
   # Display radar chart and overall score
