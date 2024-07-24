@@ -32,8 +32,8 @@ def calculate_scores(sleep_hours, exercise_days, exercise_minutes,
     return sleep_quality_score, physical_activity_score, nutrition_score, mental_wellbeing_score, overall_score
 
 def main():
-  st.set_page_config(page_title="Self Assessment")
-  st.title("Wellness Score")
+  st.set_page_config(page_title="Wellness Assessment")
+  st.title("Healthy Aging Assessment")
   menu()
 
   # User inputs
@@ -73,8 +73,7 @@ def main():
       polar=dict(
           radialaxis=dict(visible=True, range=[0, 100])
       ),
-      showlegend=False,
-      title='Healthy Aging Assessment'
+      showlegend=False
   )
 
   # Display radar chart and overall score
