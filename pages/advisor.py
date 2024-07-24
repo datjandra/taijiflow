@@ -9,22 +9,26 @@ GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 genai.configure(api_key=GOOGLE_API_KEY)
 model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_CHAT_PROMPT)
-chat = model.start_chat(history=[])
 
-st.set_page_config(page_title="Healthy Aging Advisor")
-st.title("Healthy Aging Advisor")
-menu()
+def main():
+  st.set_page_config(page_title="Healthy Aging Advisor")
+  st.title("Healthy Aging Advisor")
+  menu()
 
-for message in chat.history:
-  with st.chat_message(message.role):
-    st.markdown(message.parts[0].text)
+  chat = model.start_chat(history=[])
+  for message in chat.history:
+    with st.chat_message(message.role):
+      st.markdown(message.parts[0].text)
+  
+  if input := st.chat_input("Enter your wellness goal"):
+    with st.chat_message("user"):
+      st.markdown(input)
+  
+    with st.chat_message("advisor"):
+      with st.spinner('Thank you for your input...'):
+        response = chat.send_message(input)
+        for chunk in response:
+          st.markdown(chunk.text)
 
-if input := st.chat_input("Enter your wellness goal"):
-  with st.chat_message("user"):
-    st.markdown(input)
-
-  with st.chat_message("advisor"):
-    with st.spinner('Thank you for your input...'):
-      response = chat.send_message(input)
-      for chunk in response:
-        st.markdown(chunk.text)
+if __name__ == "__main__":
+    main()
