@@ -24,7 +24,7 @@ def main():
     with st.chat_message(role):
       st.markdown(message.parts[0].text)
   
-  if input := st.chat_input("Enter your wellness goal"):
+  if input := st.chat_input("Enter your wellness goal or question"):
     with st.chat_message("user"):
       st.markdown(input)
   
