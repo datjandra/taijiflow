@@ -33,7 +33,7 @@ def calculate_scores(sleep_hours, exercise_days, exercise_minutes,
 
 def main():
   st.set_page_config(page_title="Wellness Assessment")
-  st.title("Healthy Aging Assessment")
+  st.title("Interactive Assessment")
   menu()
 
   # User inputs
