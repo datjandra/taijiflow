@@ -16,7 +16,6 @@ model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_EXERCISE_PROMPT)
 
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
-PROMPT = os.getenv('PROMPT')
 
 TL_API_HEADERS = {
     "accept": "application/json",
