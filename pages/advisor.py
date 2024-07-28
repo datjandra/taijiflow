@@ -5,10 +5,20 @@ from menu import menu
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_CHAT_PROMPT = os.getenv('GEM_CHAT_PROMPT')
+GEM_CONFIG_TEMPERATURE = float(os.getenv('GEM_CONFIG_TEMPERATURE'))
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_CHAT_PROMPT)
+if GEM_CONFIG_TEMPERATURE < 0:
+    model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_CHAT_PROMPT)
+else:
+    model = genai.GenerativeModel(
+        GEM_MODEL,
+        system_instruction=GEM_CHAT_PROMPT,
+        generation_config={
+            "temperature": GEM_CONFIG_TEMPERATURE
+        }
+    )
 
 if "history" not in st.session_state:
   st.session_state.history = []
