@@ -8,11 +8,21 @@ from menu import menu
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_EXERCISE_PROMPT = os.getenv('GEM_EXERCISE_PROMPT')
+GEM_CONFIG_TEMPERATURE = float(os.getenv('GEM_CONFIG_TEMPERATURE'))
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 SEARCH_OPTIONS = [option.strip() for option in os.environ.get('SEARCH_OPTIONS').split(",") if option.strip()]
 
 genai.configure(api_key=GOOGLE_API_KEY)
-model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_EXERCISE_PROMPT)
+if GEM_CONFIG_TEMPERATURE < 0:
+    model = genai.GenerativeModel(GEM_MODEL, system_instruction=GEM_EXERCISE_PROMPT)
+else:
+    model = genai.GenerativeModel(
+        GEM_MODEL,
+        system_instruction=GEM_EXERCISE_PROMPT,
+        generation_config={
+            "temperature": GEM_CONFIG_TEMPERATURE
+        }
+    )
 
 TL_KEY = os.getenv('TL_KEY')
 TL_INDEX = os.getenv('TL_INDEX')
