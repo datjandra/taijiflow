@@ -25,7 +25,6 @@ def main():
     st.title("Standing Posture Analysis")
     menu()
 
-    # st.markdown("Please upload a picture of your [zhan zhuang](https://en.wikipedia.org/wiki/Zhan_zhuang) standing posture.")
     uploaded_file = st.file_uploader("Please upload a picture of your [zhan zhuang](https://en.wikipedia.org/wiki/Zhan_zhuang) standing posture.", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
       image = Image.open(uploaded_file)
