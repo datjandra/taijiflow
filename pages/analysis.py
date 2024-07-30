@@ -13,7 +13,8 @@ APP_ID = 'chat-completion'
 MODEL_ID = os.environ.get('VIS_MODEL_ID')
 MODEL_VERSION_ID = os.environ.get('VIS_MODEL_VERSION_ID')
 PAT = os.environ.get('PAT')
-PROMPT = os.getenv('VIS_ZZ_PROMPT')
+ZZ_PROMPT = os.getenv('VIS_ZZ_PROMPT')
+STS_PROMPT = os.getenv('VIS_STS_PROMPT')
 
 channel = ClarifaiChannel.get_grpc_channel()
 stub = service_pb2_grpc.V2Stub(channel)
@@ -25,12 +26,35 @@ def main():
     st.title("Standing Posture Analysis")
     menu()
 
-    uploaded_file = st.file_uploader("Please upload a picture of your [zhan zhuang](https://en.wikipedia.org/wiki/Zhan_zhuang) standing posture.", type=["png", "jpg", "jpeg"])
+    st.markdown("""
+        ## Introduction to Standing Postures
+        
+        This page analyzes your standing postures, specifically focusing on two practices for health benefits: [Zhan Zhuang](https://en.wikipedia.org/wiki/Zhan_zhuang) and [Santi Shi](https://en.wikipedia.org/wiki/Xingyiquan).
+        
+        ### Zhan Zhuang
+        Zhan Zhuang, or "standing like a tree", improves posture, balance, internal strength, mental focus, and overall vitality through sustained, meditative standing.
+        
+        ### Santi Shi
+        Santi Shi, or "three body posture", enhances balance, core and leg strength, flexibility, mental focus, and overall vitality.
+    """)
+
+    posture_type = st.selectbox(
+        "Select the type of standing posture for analysis:",
+        ("Zhan Zhuang", "Santi Shi"),
+        index=0
+    )
+    
+    uploaded_file = st.file_uploader("Please upload a picture of your standing posture.", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
       image = Image.open(uploaded_file)
       if image is not None:  
         st.image(image)
 
+      if posture_type == "Zhan Zhuang":
+        prompt = ZZ_PROMPT
+      else:
+        prompt = STS_PROMPT
+        
       bytes_data = uploaded_file.getvalue()  
       with st.spinner('Analyzing image of posture...'):  
           post_model_outputs_response = stub.PostModelOutputs(
@@ -42,7 +66,7 @@ def main():
                       resources_pb2.Input(
                           data=resources_pb2.Data(
                               text=resources_pb2.Text(
-                                  raw=PROMPT
+                                  raw=prompt
                               ),
                               image=resources_pb2.Image(
                                   base64=bytes_data
