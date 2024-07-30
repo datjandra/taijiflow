@@ -50,10 +50,10 @@ def main():
       if image is not None:  
         st.image(image)
 
-      if posture_type == "Zhan Zhuang":
-        prompt = ZZ_PROMPT
-      else:
+      if posture_type == "Santi Shi":
         prompt = STS_PROMPT
+      else:
+        prompt = ZZ_PROMPT
         
       bytes_data = uploaded_file.getvalue()  
       with st.spinner('Analyzing image of posture...'):  
