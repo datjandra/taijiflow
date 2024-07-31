@@ -121,6 +121,19 @@
         const durationInput = document.getElementById('duration');
         const trackerContainer = document.querySelector('.tracker-container');
 
+        let breathCycleTimeout;
+        function stopBreathCycle() {
+            if (breathCycleTimeout) {
+                clearTimeout(breathCycleTimeout); 
+            }
+            container.style.animation = 'none'; 
+            container.offsetHeight; 
+            container.style.animation = '';
+            trackerContainer.style.animation = 'none'; 
+            trackerContainer.offsetHeight;
+            trackerContainer.style.animation = '';
+        }
+
         function updateBreathCycle() {
             const breathTime = durationInput.value * 1000;
             const totalTime = breathTime * 2;
@@ -145,7 +158,10 @@
             }
         }
 
-        durationInput.addEventListener('input', updateBreathCycle);
+        durationInput.addEventListener('input', () => {
+            stopBreathCycle();
+            updateBreathCycle();
+        });
         updateBreathCycle();
     </script>
 </body>   
