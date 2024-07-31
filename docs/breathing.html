@@ -85,18 +85,18 @@
           }
         }
         @keyframes grow {
-          from {
+          0% {
             transform: scale(1);
           }
-          to {
+          100% {
             transform: scale(1.2);
           }
         }  
         @keyframes shrink {
-          from {
+          0% {
             transform: scale(1.2);
           }
-          to {
+          100% {
             transform: scale(1);
           }
         }
@@ -130,11 +130,11 @@
 
             function breathCycle() {
                 message.innerText = 'Breathe In';
-                container.style.animation = `grow ${breathTime / 1000}s linear forwards`;
+                container.style.animation = `grow ${breathTime / 1000}s ease-in-out forwards`;
 
                 setTimeout(() => {
                     message.innerText = 'Breathe Out';
-                    container.style.animation = `shrink ${breathTime / 1000}s linear forwards`;
+                    container.style.animation = `shrink ${breathTime / 1000}s ease-in-out forwards`;
                 }, breathTime);
 
                 setTimeout(breathCycle, totalTime);
