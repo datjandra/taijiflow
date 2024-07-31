@@ -135,6 +135,8 @@
         }
 
         function updateBreathCycle() {
+            stopBreathCycle();
+            
             const breathTime = durationInput.value * 1000;
             const totalTime = breathTime * 2;
 
@@ -145,12 +147,12 @@
                 message.innerText = 'Breathe In';
                 container.style.animation = `grow ${breathTime / 1000}s ease-in-out forwards`;
 
-                setTimeout(() => {
+                breathCycleTimeout = setTimeout(() => {
                     message.innerText = 'Breathe Out';
                     container.style.animation = `shrink ${breathTime / 1000}s ease-in-out forwards`;
                 }, breathTime);
 
-                setTimeout(breathCycle, totalTime);
+                breathCycleTimeout = setTimeout(breathCycle, totalTime);
             }
 
             if (container && message) {
