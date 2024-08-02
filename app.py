@@ -59,7 +59,7 @@ def search_pubmed(medical_condition=None, lifestyle_risks=None, wellness_goal=No
         'db': 'pubmed',
         'term': encoded_query,
         'retmode': 'json',
-        'retmax': retmax
+        'retmax': 1
     }
     
     response = requests.get(url, params=params)
