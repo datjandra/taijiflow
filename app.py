@@ -34,8 +34,68 @@ TL_API_HEADERS = {
     "Content-Type": "application/json"
 }
 
+def create_pubmed_query(medical_condition=None, lifestyle_risks=None, wellness_goal=None):
+    query = f'("tai chi" OR "qigong")'
+    
+    if medical_condition or lifestyle_risks or wellness_goal:
+        sub_clause = []
+        if medical_condition:
+            sub_clause.append(f'"{medical_condition}"')
+        if lifestyle_risks:
+            sub_clause.append(f'"{lifestyle_risks}"')
+        if wellness_goal:
+            sub_clause.append(f'"{wellness_goal}"')
+        
+        sub_clause_str = ' OR '.join(sub_clause)
+        query += f' AND ({sub_clause_str})'
+    return query
+
+def search_pubmed(medical_condition=None, lifestyle_risks=None, wellness_goal=None):
+    query = create_pubmed_query(medical_condition, lifesytle_risks, wellness_goal)    
+    encoded_query = requests.utils.quote(query)
+    
+    url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
+    params = {
+        'db': 'pubmed',
+        'term': encoded_query,
+        'retmode': 'json',
+        'retmax': retmax
+    }
+    
+    response = requests.get(url, params=params)
+    response.raise_for_status()  
+    
+    data = response.json()
+    pubmed_ids = data.get('esearchresult', {}).get('idlist', [])
+    return pubmed_ids
+
+def fetch_pubmed_data(pubmed_id):
+    url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+    params = {
+        'db': 'pubmed',
+        'id': pubmed_id,
+        'retmode': 'xml',
+        'rettype': 'abstract'
+    }
+
+    response = requests.get(url, params=params)
+    response.raise_for_status()  # Raise an exception for HTTP errors
+
+    root = ElementTree.fromstring(response.content)
+    article = root.find('.//PubmedArticle')
+    if article is None:
+        return None, None, None
+
+    title_elem = article.find('.//ArticleTitle')
+    abstract_elem = article.find('.//Abstract/AbstractText')
+    link = f"https://pubmed.ncbi.nlm.nih.gov/{pubmed_id}/"
+
+    title = title_elem.text if title_elem is not None else 'No title available'
+    abstract = abstract_elem.text if abstract_elem is not None else 'No abstract available'
+    return link, title, abstract
+
 @lru_cache(maxsize=128)
-def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
+def profile_to_exercise(age, gender, height, weight, conditions, risks, goal, title, abstract):
     conditions = conditions if conditions else "None"
     risks = risks if risks else "None"
     goal = goal if goal else "None"
@@ -48,6 +108,12 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal):
     Conditions: {conditions}
     Risks: {risks}
     Goal: {goal}
+
+    Title:
+    {title}
+
+    Abstract:
+    {abstract}
     """
     
     try:
@@ -135,13 +201,18 @@ def main():
         pl_disclaimer = st.empty()
 
         with st.spinner('Suggesting a relevant exercise...'):
-            exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal)        
+            pubmed_ids = search_pubmed(conditions, risks, goal)
+            link, title, abstract = fetch_pubmed_data(pubmed_ids[0])
+            exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal, title, abstract)        
         pl_text.write(exercise)
 
         with st.spinner('Finding example video clips...'):    
             clips = video_search(exercise)
             
         if clips:
+            if link and title:
+                st.markdown(f"[{title}]({link})")
+    
             cols = cycle(st.columns(2)) 
             for clip in clips:
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
