@@ -203,6 +203,8 @@ def main():
         with st.spinner('Suggesting a relevant exercise...'):
             pubmed_ids = search_pubmed(conditions, risks, goal)
             if not pubmed_ids:
+                link = None
+                title = None
                 exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal) 
             else:
                 link, title, abstract = fetch_pubmed_data(pubmed_ids[0])
