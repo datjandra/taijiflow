@@ -5,6 +5,7 @@ from itertools import cycle
 from functools import lru_cache
 import google.generativeai as genai
 from menu import menu
+from xml.etree import ElementTree
 
 GEM_MODEL = os.getenv('GEM_MODEL')
 GEM_EXERCISE_PROMPT = os.getenv('GEM_EXERCISE_PROMPT')
