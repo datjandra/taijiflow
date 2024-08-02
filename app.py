@@ -95,7 +95,7 @@ def fetch_pubmed_data(pubmed_id):
     return link, title, abstract
 
 @lru_cache(maxsize=128)
-def profile_to_exercise(age, gender, height, weight, conditions, risks, goal, title, abstract):
+def profile_to_exercise(age, gender, height, weight, conditions, risks, goal, title=None, abstract=None):
     conditions = conditions if conditions else "None"
     risks = risks if risks else "None"
     goal = goal if goal else "None"
@@ -202,8 +202,11 @@ def main():
 
         with st.spinner('Suggesting a relevant exercise...'):
             pubmed_ids = search_pubmed(conditions, risks, goal)
-            link, title, abstract = fetch_pubmed_data(pubmed_ids[0])
-            exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal, title, abstract)        
+            if not pubmed_ids:
+                exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal) 
+            else:
+                link, title, abstract = fetch_pubmed_data(pubmed_ids[0])
+                exercise = profile_to_exercise(age, gender, height, weight, conditions, risks, goal, title, abstract)        
         pl_text.write(exercise)
 
         with st.spinner('Finding example video clips...'):    
