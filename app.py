@@ -108,19 +108,17 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal, ti
     Conditions: {conditions}
     Risks: {risks}
     Goal: {goal}
-
-    Title:
-    {title}
-
-    Abstract:
-    {abstract}
     """
+
+    if title and abstract:
+        profile += f"\nTitle: {title}"
+        profile += f"\nAbstract: {abstract}"       
     
     try:
         response = model.generate_content(profile)
         return response.text
     except:
-        return "Unable to suggest a relevant exercise. Please rewrite query or try again later."
+        return "Unable to suggest a relevant exercise. Please rewrite the query or try again later."
     
 @lru_cache(maxsize=128)
 def source_url(video_id):
@@ -215,13 +213,13 @@ def main():
             clips = video_search(exercise)
             
         if clips:
-            if link and title:
-                st.markdown(f"[{title}]({link})")
-    
             cols = cycle(st.columns(2)) 
             for clip in clips:
                 next(cols).video(clip["video_url"], start_time=clip["start"], end_time=clip["end"])
             pl_disclaimer.markdown("These exercises are not intended to replace professional medical advice, diagnosis, or treatment. Please consult your healthcare provider with any questions or concerns regarding your health.")    
+            
+            if link and title:
+                st.markdown(f"**Reference:**\n[{title}]({link})")
         else:
             st.markdown("No example video clips found, please retry or rewrite the query.")
         
