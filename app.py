@@ -52,7 +52,7 @@ def create_pubmed_query(medical_condition=None, lifestyle_risks=None, wellness_g
 
 def search_pubmed(medical_condition=None, lifestyle_risks=None, wellness_goal=None):
     query = create_pubmed_query(medical_condition, lifestyle_risks, wellness_goal)    
-    encoded_query = requests.utils.quote(query)
+    encoded_query = query.replace('"', '\\"')
     
     url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
     params = {
