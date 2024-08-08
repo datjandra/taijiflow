@@ -101,6 +101,7 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal, ti
     goal = goal if goal else "None"
     
     profile = f"""
+    Profile:
     Age: {age}
     Gender: {gender}
     Height: {height} inches
@@ -111,6 +112,7 @@ def profile_to_exercise(age, gender, height, weight, conditions, risks, goal, ti
     """
 
     if title and abstract:
+        profile += f"\nContext:"
         profile += f"\nTitle: {title}"
         profile += f"\nAbstract: {abstract}"       
     
