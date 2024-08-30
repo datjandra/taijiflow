@@ -134,15 +134,19 @@ def source_url(video_id):
 
 @lru_cache(maxsize=128)
 def video_search(query):
-    url = "https://api.twelvelabs.io/v1.2/search-v2"
+    url = "https://api.twelvelabs.io/v1.2/search"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
         "group_by": "clip",
         "threshold": "low",
         "page_limit": 8,
-        "query_text": query,
-        "index_id": TL_INDEX
+        "query": query,
+        "index_id": TL_INDEX,
+        "adjust_confidence_level": 0.5,
+        "sort_option": "score",
+        "operator": "or",
+        "conversation_option": "semantic"
     }
 
     response = requests.post(url, json=payload, headers=TL_API_HEADERS)    
