@@ -148,6 +148,8 @@ def video_search(query):
     response = requests.post(url, json=payload, headers=TL_API_HEADERS)    
     response_json = response.json()
 
+    st.write(response);
+    
     clips = []
     for item in response_json.get('data', []):
         video_id = item.get('video_id')
