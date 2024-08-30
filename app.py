@@ -128,7 +128,7 @@ def source_url(video_id):
     response = requests.get(url, headers=TL_API_HEADERS)
     response_json = response.json()
     if 'hls' in response_json:
-        return response_json['hls']['url']
+        return response_json['hls']['video_url']
     else:
         return None
 
