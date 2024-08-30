@@ -127,25 +127,21 @@ def source_url(video_id):
     url = f"https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"    
     response = requests.get(url, headers=TL_API_HEADERS)
     response_json = response.json()
-    if 'source' in response_json:
-        return response_json['source']['url']
+    if 'his' in response_json:
+        return response_json['his']['url']
     else:
         return None
 
 @lru_cache(maxsize=128)
 def video_search(query):
-    url = "https://api.twelvelabs.io/v1.2/search"
+    url = "https://api.twelvelabs.io/v1.2/search-v2"
 
     payload = {
         "search_options": SEARCH_OPTIONS,
-        "adjust_confidence_level": 0.5,
-        "sort_option":"score",
-        "operator":"or",
-        "conversation_option":"semantic",
         "group_by": "clip",
         "threshold": "low",
         "page_limit": 8,
-        "query": query,
+        "query_text": query,
         "index_id": TL_INDEX
     }
 
