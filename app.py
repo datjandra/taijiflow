@@ -127,8 +127,8 @@ def source_url(video_id):
     url = f"https://api.twelvelabs.io/v1.2/indexes/{TL_INDEX}/videos/{video_id}"    
     response = requests.get(url, headers=TL_API_HEADERS)
     response_json = response.json()
-    if 'his' in response_json:
-        return response_json['his']['url']
+    if 'hls' in response_json:
+        return response_json['hls']['url']
     else:
         return None
 
