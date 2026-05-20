@@ -2,6 +2,10 @@
 
 **A personalized Tai Chi and Qigong exercise recommendation platform powered by AI**
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/datjandra/taijiflow/refs/heads/main/baduanjin.jpg" alt="TaijiFlow Baduanjin Illustration" width="900">
+</p>
+
 ## Overview
 
 TaijiFlow is an intelligent wellness application that combines modern AI technology with traditional Chinese exercise practices. It provides personalized Tai Chi and Qigong exercise recommendations based on your health profile, medical conditions, wellness goals, and lifestyle factors. The app also includes video demonstrations and integrates scientific research to support your wellness journey.
@@ -106,9 +110,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 ## Disclaimer
 
 These exercises are not intended to replace professional medical advice, diagnosis, or treatment. Always consult with your healthcare provider before starting any new exercise program, especially if you have existing medical conditions.
-
----
-
-**Created by**: datjandra  
-**Language**: Python  
-**Last Updated**: September 2024
